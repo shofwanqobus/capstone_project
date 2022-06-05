@@ -5,7 +5,10 @@ const homePage = '/home-page';
 const logInChoice = '/login-choice';
 const logInAccount = '/login-account';
 const signUpAccount = '/signup-account';
-const searchRoute = '/search';
-const detailRoute = '/detail-page';
+const searchPage = '/search';
+const detailPage = '/detail-page';
+const paymentScreen = '/payment-screen';
+const paymentSucceed = '/payment-succeed';
+const tripDetail = '/trip-detail';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();

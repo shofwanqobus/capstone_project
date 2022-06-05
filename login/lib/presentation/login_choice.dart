@@ -14,115 +14,152 @@ class _LoginChoice extends State<LoginChoice> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPrimary2,
-      appBar: AppBar(
-        backgroundColor: backgroundPrimary1,
-        title: Column(
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                'Welcome',
-                style: kHeading4,
-                textAlign: TextAlign.left,
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 300,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: backgroundPrimary1,
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                'Spend your holiday only with one click, and enjoy your trip',
-                style: kSubtitle,
-                textAlign: TextAlign.left,
-              ),
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(top: 16, left: 28, right: 28),
+                  child: Text(
+                    'Welcome',
+                    style: kHeading4,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+                  child: Text(
+                    'Spend your holiday only with one click, and enjoy your trip',
+                    style: textButton2,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                SizedBox(
+                  height: 150,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 28,
+                      vertical: 4,
+                    ),
+                    itemCount: 10,
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 12);
+                    },
+                    itemBuilder: (context, index) {
+                      return buildCard(index);
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        toolbarHeight: 280,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(25),
           ),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              onPressed: () => Navigator.pushNamed(context, logInAccount),
-              icon: const Icon(
-                Icons.supervisor_account,
-                size: 40,
-                color: Colors.black,
-              ),
-              label: Text('Login with Account', style: kSubtitle),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                minimumSize: const Size(250, 55),
-              ),
+          const SizedBox(height: 30),
+          Center(
+            child: Column(
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () => Navigator.pushNamed(context, logInAccount),
+                  icon: const Icon(
+                    Icons.supervisor_account,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  label: Text('Login with Account', style: kSubtitle),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    minimumSize: const Size(250, 55),
+                    alignment: Alignment.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.g_mobiledata_rounded,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  label: Text('Login with Google', style: kSubtitle),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    minimumSize: const Size(250, 55),
+                    alignment: Alignment.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.apple,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  label: Text('Login with iCloud', style: kSubtitle),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    minimumSize: const Size(250, 55),
+                    alignment: Alignment.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.facebook,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  label: Text('Login with Facebook', style: kSubtitle),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    minimumSize: const Size(250, 55),
+                    alignment: Alignment.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, signUpAccount),
+                  child: Text(
+                    "Doesn't have an account? Sign Up Now.",
+                    style: kBodyText,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.g_mobiledata_rounded,
-                size: 40,
-                color: Colors.black,
-              ),
-              label: Text('Login with Google', style: kSubtitle),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                minimumSize: const Size(250, 55),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.apple,
-                size: 40,
-                color: Colors.black,
-              ),
-              label: Text('Login with iCloud', style: kSubtitle),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                minimumSize: const Size(250, 55),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.facebook,
-                size: 40,
-                color: Colors.black,
-              ),
-              label: Text('Login with Facebook', style: kSubtitle),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                minimumSize: const Size(250, 55),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextButton(
-              onPressed: () => Navigator.pushNamed(context, signUpAccount),
-              child: Text(
-                "Doesn't have an account? Sign Up Now.",
-                style: kBodyText,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
+
+Widget buildCard(int index) => Container(
+      width: 150,
+      decoration: BoxDecoration(
+        color: backgroundPrimary2,
+        borderRadius: BorderRadius.circular(15),
+      ),
+    );

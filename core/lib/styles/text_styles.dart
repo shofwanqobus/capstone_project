@@ -7,6 +7,8 @@ final TextStyle kHeading4 = GoogleFonts.inter(
     fontSize: 50, fontWeight: FontWeight.bold, color: backgroundPrimary2);
 final TextStyle kHeading5 = GoogleFonts.inter(
     fontSize: 36, fontWeight: FontWeight.bold, color: backgroundPrimary2);
+final TextStyle headingDetail =
+    GoogleFonts.inter(fontSize: 28, fontWeight: FontWeight.bold, color: black);
 final TextStyle kHeading6 = GoogleFonts.inter(
     fontSize: 19,
     fontWeight: FontWeight.bold,
@@ -23,6 +25,11 @@ final TextStyle kBodyText =
 final TextStyle button = GoogleFonts.inter(
   fontSize: 24,
   color: backgroundPrimary2,
+  fontWeight: FontWeight.bold,
+);
+final TextStyle button2 = GoogleFonts.inter(
+  fontSize: 24,
+  color: backgroundPrimary1,
   fontWeight: FontWeight.bold,
 );
 final TextStyle textButton = GoogleFonts.inter(

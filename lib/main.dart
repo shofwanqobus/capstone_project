@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:login/login.dart';
 import 'package:mainpage/mainpage.dart';
+import 'package:mainpage/presentation/pages/trip_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,14 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const LoginAccount());
             case homePage:
               return MaterialPageRoute(builder: (_) => const HomePage());
+            case detailPage:
+              return MaterialPageRoute(builder: (_) => DetailPage());
+            case paymentScreen:
+              return MaterialPageRoute(builder: (_) => const PaymentPage());
+            case paymentSucceed:
+              return MaterialPageRoute(builder: (_) => PaymentSucceed());
+            case tripDetail:
+              return MaterialPageRoute(builder: (_) => TripDetailPage());
           }
         });
   }
