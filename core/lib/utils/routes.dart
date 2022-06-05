@@ -10,5 +10,6 @@ const detailPage = '/detail-page';
 const paymentScreen = '/payment-screen';
 const paymentSucceed = '/payment-succeed';
 const tripDetail = '/trip-detail';
+const ticketSearch = '/ticket';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();

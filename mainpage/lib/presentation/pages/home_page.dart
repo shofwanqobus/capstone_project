@@ -76,7 +76,7 @@ class _HomePage extends State<HomePage> {
                     alignment: Alignment.center,
                     icon: const Icon(Icons.airplane_ticket_sharp,
                         size: 50, color: backgroundPrimary2),
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, ticketSearch),
                   ),
                 ),
                 Container(
