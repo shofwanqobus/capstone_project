@@ -11,5 +11,9 @@ const paymentScreen = '/payment-screen';
 const paymentSucceed = '/payment-succeed';
 const tripDetail = '/trip-detail';
 const ticketSearch = '/ticket';
+const bookedPage = '/booked';
+const userPage = '/user';
+const settingsPage = '/settings';
+const ticketList = '/ticket-list';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();

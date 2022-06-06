@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:login/login.dart';
 import 'package:mainpage/mainpage.dart';
-import 'package:mainpage/presentation/pages/trip_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +37,16 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => TripDetailPage());
           case ticketSearch:
             return MaterialPageRoute(builder: (_) => const TicketSearch());
+          case searchPage:
+            return MaterialPageRoute(builder: (_) => const SearchPage());
+          case bookedPage:
+            return MaterialPageRoute(builder: (_) => const BookedPage());
+          case userPage:
+            return MaterialPageRoute(builder: (_) => const UserPage());
+          case settingsPage:
+            return MaterialPageRoute(builder: (_) => const SettingsPage());
+          case ticketList:
+            return MaterialPageRoute(builder: (_) => const TicketList());
         }
       },
     );

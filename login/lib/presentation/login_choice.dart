@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:login/login.dart';
 
 class LoginChoice extends StatefulWidget {
   const LoginChoice({Key? key}) : super(key: key);
@@ -71,73 +70,116 @@ class _LoginChoice extends State<LoginChoice> {
           Center(
             child: Column(
               children: [
-                ElevatedButton.icon(
-                  onPressed: () => Navigator.pushNamed(context, logInAccount),
-                  icon: const Icon(
-                    Icons.supervisor_account,
-                    size: 40,
-                    color: Colors.black,
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, logInAccount),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    width: 245,
+                    height: 55,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.supervisor_account,
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                        const SizedBox(width: 12),
+                        Text('Login with Account', style: kSubtitle),
+                      ],
+                    ),
                   ),
-                  label: Text('Login with Account', style: kSubtitle),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    minimumSize: const Size(250, 55),
-                    alignment: Alignment.center,
+                ),
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, logInAccount),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    width: 245,
+                    height: 55,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.g_mobiledata,
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                        const SizedBox(width: 12),
+                        Text('Login with Google', style: kSubtitle),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, logInAccount),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    width: 245,
+                    height: 55,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.apple,
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                        const SizedBox(width: 12),
+                        Text('Login with iCloud', style: kSubtitle),
+                      ],
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, logInAccount),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    width: 245,
+                    height: 55,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.facebook,
+                          color: Colors.black,
+                          size: 40,
+                        ),
+                        const SizedBox(width: 12),
+                        Text('Login with Facebook', style: kSubtitle),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.g_mobiledata_rounded,
-                    size: 40,
-                    color: Colors.black,
-                  ),
-                  label: Text('Login with Google', style: kSubtitle),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    minimumSize: const Size(250, 55),
-                    alignment: Alignment.center,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.apple,
-                    size: 40,
-                    color: Colors.black,
-                  ),
-                  label: Text('Login with iCloud', style: kSubtitle),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    minimumSize: const Size(250, 55),
-                    alignment: Alignment.center,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.facebook,
-                    size: 40,
-                    color: Colors.black,
-                  ),
-                  label: Text('Login with Facebook', style: kSubtitle),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    minimumSize: const Size(250, 55),
-                    alignment: Alignment.center,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, signUpAccount),
