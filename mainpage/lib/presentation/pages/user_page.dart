@@ -22,6 +22,10 @@ class UserPage extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             color: backgroundPrimary1,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
           ),
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -83,13 +87,31 @@ class UserPage extends StatelessWidget {
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              UserButton(icon: Icons.favorite, text: "Favorite"),
-              UserButton(icon: Icons.location_on, text: "Recent Place"),
+            children: <Widget>[
               UserButton(
-                  icon: Icons.location_history_sharp, text: "Change Points"),
-              UserButton(icon: Icons.settings, text: "Account Settings"),
-              UserButton(icon: Icons.rate_review, text: "Your Review's"),
+                  icon: Icons.favorite,
+                  text: "Favorite",
+                  onTap: () {
+                    Navigator.pushNamed(context, userFavorite);
+                  }),
+              UserButton(
+                  icon: Icons.location_on,
+                  text: "Recent Place",
+                  onTap: () {
+                    Navigator.pushNamed(context, userRecentPlaces);
+                  }),
+              UserButton(
+                  icon: Icons.location_history_sharp,
+                  text: "Change Points",
+                  onTap: () {
+                    Navigator.pushNamed(context, userChangePoints);
+                  }),
+              UserButton(
+                  icon: Icons.rate_review,
+                  text: "Reviews",
+                  onTap: () {
+                    Navigator.pushNamed(context, userReviews);
+                  }),
             ],
           ),
         )
@@ -99,16 +121,21 @@ class UserPage extends StatelessWidget {
 }
 
 class UserButton extends StatelessWidget {
-  const UserButton({Key? key, required this.icon, required this.text})
-      : super(key: key);
+  const UserButton({
+    Key? key,
+    required this.icon,
+    required this.text,
+    required this.onTap,
+  }) : super(key: key);
 
   final IconData icon;
+  final Function() onTap;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         decoration: const BoxDecoration(
           color: backgroundPrimary1,

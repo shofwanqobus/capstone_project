@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 
 class PaymentSucceed extends StatelessWidget {
+  const PaymentSucceed({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +61,8 @@ class PaymentSucceed extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ElevatedButton(
-                    onPressed: () => Navigator.pushNamed(context, bookedPage),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, paymentSucceed),
                     child: Text('Status', style: button),
                     style: ElevatedButton.styleFrom(
                       elevation: 2,
