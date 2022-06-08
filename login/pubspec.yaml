@@ -10,8 +10,10 @@ environment:
 dependencies:
   core:
     path: ../core
+  dartz: ^0.10.1
   flutter:
     sdk: flutter
+  sqflite: ^2.0.2+1
 
 dev_dependencies:
   flutter_test:

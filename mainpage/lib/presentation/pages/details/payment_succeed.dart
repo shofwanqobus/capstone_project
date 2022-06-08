@@ -59,8 +59,7 @@ class PaymentSucceed extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, paymentSucceed),
+                    onPressed: () => Navigator.pushNamed(context, bookedPage),
                     child: Text('Status', style: button),
                     style: ElevatedButton.styleFrom(
                       elevation: 2,
