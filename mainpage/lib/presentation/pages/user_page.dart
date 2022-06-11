@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 AppBar userAppBar() {
   return AppBar(
@@ -12,6 +15,11 @@ AppBar userAppBar() {
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
+
+  Future<String> getName() async {
+    final prefs = await SharedPreferences.getInstance();
+    return json.decode(prefs.getString("data")!)["username"];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +50,34 @@ class UserPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Welcome, Sarah",
-                        style: TextStyle(
-                          fontSize:
-                              Theme.of(context).textTheme.headline5!.fontSize,
-                          color: Colors.white,
-                        ),
-                      ),
+                      FutureBuilder(
+                          future: getName(),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                "Welcome, " + snapshot.data,
+                                style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .headline5!
+                                      .fontSize,
+                                  color: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return Text(
+                                "Welcome, ",
+                                style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .headline5!
+                                      .fontSize,
+                                  color: Colors.white,
+                                ),
+                              );
+                            }
+                          }),
                       const MediumText(text: "How's your day?"),
                       const MediumText(text: "We hope that you're fine"),
                     ],

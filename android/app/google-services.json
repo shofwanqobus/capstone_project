@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "433958702719",
+    "project_id": "be-traveled",
+    "storage_bucket": "be-traveled.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433958702719:android:44e1454446b6d241c0794a",
+        "android_client_info": {
+          "package_name": "com.example.be_traveled"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433958702719-6t81lvdm496318nf84uop752q05e35i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD18lqyk4XFevkizzpYotD_8CdM6OS3k78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433958702719-6t81lvdm496318nf84uop752q05e35i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

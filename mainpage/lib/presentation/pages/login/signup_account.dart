@@ -1,5 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpAccount extends StatefulWidget {
   const SignUpAccount({Key? key}) : super(key: key);
@@ -9,6 +11,14 @@ class SignUpAccount extends StatefulWidget {
 }
 
 class _SignUpAccount extends State<SignUpAccount> {
+  final _auth = FirebaseAuth.instance;
+  final _db = FirebaseFirestore.instance;
+
+  late String username;
+  late String email;
+  late String password;
+  late String phoneNumber;
+  late String dateOfBirth;
   late bool checkbox = false;
 
   @override
@@ -64,32 +74,10 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) {},
+                onChanged: (query) => username = query,
                 key: const Key('username'),
                 decoration: InputDecoration(
                   hintText: 'Username...',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                textInputAction: TextInputAction.send,
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(top: 16, left: 52, bottom: 4),
-              child: Text(
-                'Password',
-                style: kSubtitle,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                onChanged: (query) {},
-                key: const Key('password'),
-                decoration: InputDecoration(
-                  hintText: 'Password...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -108,10 +96,36 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) {},
+                onChanged: (value) {
+                  email = value;
+                },
                 key: const Key('email'),
                 decoration: InputDecoration(
                   hintText: 'E-mail...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                textInputAction: TextInputAction.send,
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(top: 16, left: 52, bottom: 4),
+              child: Text(
+                'Password',
+                style: kSubtitle,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: TextField(
+                onChanged: (value) {
+                  password = value;
+                },
+                key: const Key('password'),
+                decoration: InputDecoration(
+                  hintText: 'Password...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -130,7 +144,7 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) {},
+                onChanged: (query) => phoneNumber = query,
                 key: const Key('phone-number'),
                 decoration: InputDecoration(
                   hintText: 'Phone Number...',
@@ -152,7 +166,7 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) {},
+                onChanged: (query) => dateOfBirth = query,
                 key: const Key('date-of-birth'),
                 decoration: InputDecoration(
                   hintText: 'DD/MM/YYYY...',
@@ -195,7 +209,32 @@ class _SignUpAccount extends State<SignUpAccount> {
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                try {
+                  if (!checkbox) throw "terms and conditions is a requirement";
+
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+
+                  final insertUser = <String, dynamic>{
+                    "id": newUser.user!.uid,
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "phone_number": phoneNumber,
+                    "date_of_birth": dateOfBirth,
+                  };
+
+                  _db.collection("users").doc(email).set(insertUser);
+
+                  Navigator.pushNamed(context, logInAccount);
+                } catch (e) {
+                  // TODO: Error message, example: checkbox not checked, email poorly written, password lesser than 6, ...
+                  // print(e);
+                }
+              },
               child: Text('Create Account', style: button),
               style: ElevatedButton.styleFrom(
                 elevation: 2,

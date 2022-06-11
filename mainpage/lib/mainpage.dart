@@ -29,3 +29,7 @@ export 'presentation/pages/user/recent_places.dart';
 export 'presentation/pages/user/change_points.dart';
 export 'presentation/pages/user/reviews.dart';
 export 'presentation/pages/user/review.dart';
+
+export 'presentation/pages/login/login_account.dart';
+export 'presentation/pages/login/signup_account.dart';
+export 'presentation/pages/login/login_choice.dart';

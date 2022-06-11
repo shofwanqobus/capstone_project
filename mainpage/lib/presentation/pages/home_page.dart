@@ -202,7 +202,7 @@ class HomeScreen extends StatelessWidget {
                   return const SizedBox(width: 12);
                 },
                 itemBuilder: (context, index) {
-                  return buildCard(index);
+                  return homeBuildCard(index);
                 },
               ),
             ),
@@ -228,7 +228,7 @@ class HomeScreen extends StatelessWidget {
                   return const SizedBox(width: 12);
                 },
                 itemBuilder: (context, index) {
-                  return buildCard(index);
+                  return homeBuildCard(index);
                 },
               ),
             ),
@@ -239,7 +239,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget buildCard(int index) => Column(
+Widget homeBuildCard(int index) => Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -59,7 +59,7 @@ class _LoginChoice extends State<LoginChoice> {
                       return const SizedBox(width: 12);
                     },
                     itemBuilder: (context, index) {
-                      return buildCard(index);
+                      return loginBuildCard(index);
                     },
                   ),
                 ),
@@ -198,7 +198,8 @@ class _LoginChoice extends State<LoginChoice> {
   }
 }
 
-Widget buildCard(int index) => Container(
+
+Widget loginBuildCard(int index) => Container(
       width: 150,
       decoration: BoxDecoration(
         color: backgroundPrimary2,

@@ -1,12 +1,20 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:mainpage/mainpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsAccountChangePhoneNumber extends StatelessWidget {
   const SettingsAccountChangePhoneNumber({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final db = FirebaseFirestore.instance;
+
+    TextEditingController controller = TextEditingController();
+
     return Scaffold(
       appBar: settingsAccountAppBar(),
       body: Column(
@@ -31,6 +39,7 @@ class SettingsAccountChangePhoneNumber extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: TextField(
               onChanged: (value) {},
+              controller: controller,
               key: const Key('Phone Number'),
               decoration: InputDecoration(
                 hintText: '08xx...',
@@ -43,9 +52,20 @@ class SettingsAccountChangePhoneNumber extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              final newValue = controller.text;
+              final prefs = await SharedPreferences.getInstance();
+              final data = json.decode(prefs.getString("data")!);
+              final email = data["email"];
+
+              final docRefs = db.collection("users").doc(email);
+              docRefs.update({"phone_number": newValue}).then((value) {
+                print('Phone number updated');
+              }, onError: (e) {
+                print(e);
+              });
+
               Navigator.pop(context);
-              Navigator.pushNamed(context, settingsAccount);
             },
             child: Text('Submit', style: button),
             style: ElevatedButton.styleFrom(

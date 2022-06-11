@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mainpage/presentation/pages/settings/Utils/components.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 AppBar settingsAppBar() {
   return AppBar(
@@ -11,6 +13,8 @@ AppBar settingsAppBar() {
     title: const Text("Settings", style: TextStyle(fontSize: 24.0)),
   );
 }
+
+final _auth = FirebaseAuth.instance;
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -54,7 +58,18 @@ class SettingsPage extends StatelessWidget {
               Navigator.pushNamed(context, settingsPasswordConfirmation);
             },
           ),
-          SettingsButton(icon: Icons.logout, text: "Log Out", onTap: () {}),
+          SettingsButton(
+            icon: Icons.logout,
+            text: "Log Out",
+            backgroundColor: Colors.red[400]!,
+            onTap: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.remove("data");
+
+              await _auth.signOut();
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );

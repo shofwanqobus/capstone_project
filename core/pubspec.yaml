@@ -1,8 +1,7 @@
 name: core
 description: A new Flutter package project.
 version: 0.0.1
-publish_to: 'none'
-homepage:
+publish_to: "none"
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -12,6 +11,8 @@ dependencies:
   equatable: ^2.0.3
   login:
     path: ../login
+  mainpage:
+    path: ../mainpage
   flutter:
     sdk: flutter
   google_fonts: ^3.0.1
