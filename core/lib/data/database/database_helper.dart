@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:login/data/models/user_table.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
@@ -18,7 +18,9 @@ class DatabaseHelper {
     return _database;
   }
 
-  static const String _tblUsers = 'users';
+  static const String _tblHotel = 'hotels';
+  static const String _tblTrip = 'trips';
+  static const String _tblTicket = 'tickets';
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
@@ -29,34 +31,46 @@ class DatabaseHelper {
   }
 
   void _onCreate(Database db, int version) async {
-    await db.execute('''
-      CREATE TABLE  $_tblUsers (
+    await db.execute(
+        '''
+      CREATE TABLE  $_tblHotel (
         id TEXT PRIMARY KEY,
-        username TEXT,
-        password TEXT,
-        email TEXT
+        name TEXT,
+        photoUrl TEXT,
+        price TEXT
+      );
+    ''');
+
+    await db.execute(
+        '''
+      CREATE TABLE  $_tblTrip (
+        id TEXT PRIMARY KEY,
+        name TEXT,
+        photoUrl TEXT,
+        price TEXT
+      );
+    ''');
+
+    await db.execute(
+        '''
+      CREATE TABLE  $_tblTicket (
+        id TEXT PRIMARY KEY,
+        name TEXT,
+        photoUrl TEXT,
+        price TEXT
       );
     ''');
   }
 
-  Future<int> addUsers(UsersTable user) async {
+  Future<void> bookedHotel(HotelItemsModel hotel) async {
     final db = await database;
-    return await db!.insert(_tblUsers, user.toJson());
+    await db!.insert(_tblHotel, hotel.toJson());
   }
 
-  Future<int> removeUsers(UsersTable user) async {
-    final db = await database;
-    return await db!.delete(
-      _tblUsers,
-      where: 'id=?',
-      whereArgs: [user.id],
-    );
-  }
-
-  Future<Map<String, dynamic>?> getUsersById(String id) async {
+  Future<Map<String, dynamic>?> getHotelById(String id) async {
     final db = await database;
     final results = await db!.query(
-      _tblUsers,
+      _tblHotel,
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -68,10 +82,10 @@ class DatabaseHelper {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getUsersList() async {
+  Future<List<HotelItemsModel>> getBookedHotel() async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblUsers);
+    List<Map<String, dynamic>> result = await db!.query(_tblHotel);
 
-    return results;
+    return result.map((data) => HotelItemsModel.fromJson(data)).toList();
   }
 }
