@@ -10,8 +10,8 @@ class PaymentSucceed extends StatelessWidget {
       backgroundColor: backgroundPrimary2,
       body: Center(
         child: Container(
-          height: 325,
-          width: 250,
+          height: 350,
+          width: 275,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Colors.white,
@@ -56,6 +56,7 @@ class PaymentSucceed extends StatelessWidget {
                 indent: 20,
                 endIndent: 20,
               ),
+              const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,

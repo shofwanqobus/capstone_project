@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
-import 'package:mainpage/data/models/hotel_model.dart';
+import 'package:mainpage/data/models/trip_model.dart';
 
-class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key, required this.hotel}) : super(key: key);
+class TripDetailPage extends StatelessWidget {
+  const TripDetailPage({Key? key, required this.trip}) : super(key: key);
 
-  final HotelItemsModel hotel;
+  final TripItemsModel trip;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class DetailPage extends StatelessWidget {
       body: Stack(
         children: [
           CachedNetworkImage(
-            imageUrl: hotel.photoUrl!,
+            imageUrl: trip.photoUrl!,
             width: screenWidth,
             placeholder: (context, url) =>
                 const Center(child: CircularProgressIndicator()),
@@ -75,7 +75,7 @@ class DetailPage extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: Text(
-                            hotel.name,
+                            trip.name,
                             style: headingDetail,
                           ),
                         ),
@@ -89,7 +89,7 @@ class DetailPage extends StatelessWidget {
                                   Icons.star,
                                   color: Colors.amber[400],
                                 ),
-                                Text('${hotel.rating}', style: kBodyText),
+                                Text('${trip.rating}', style: kBodyText),
                               ],
                             ),
                             Row(
@@ -98,7 +98,7 @@ class DetailPage extends StatelessWidget {
                                   Icons.price_change,
                                   color: Colors.amber[400],
                                 ),
-                                Text('Rp. ${hotel.price}', style: kBodyText),
+                                Text('Rp. ${trip.price}', style: kBodyText),
                               ],
                             ),
                           ],
@@ -106,7 +106,7 @@ class DetailPage extends StatelessWidget {
                         Row(
                           children: [
                             Icon(Icons.location_pin, color: Colors.amber[400]),
-                            Text(hotel.address, style: kBodyText),
+                            Text(trip.location, style: kBodyText),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -116,7 +116,7 @@ class DetailPage extends StatelessWidget {
                           textAlign: TextAlign.justify,
                         ),
                         Text(
-                          hotel.description,
+                          trip.description,
                           style: kBodyText,
                           textAlign: TextAlign.justify,
                         ),

@@ -1,0 +1,84 @@
+{
+    "tickets": [
+        {
+            "id": "T1",
+            "name": "Garuda Airlines",
+            "photoUrl": "https://www.kindpng.com/picc/m/616-6164490_images-maskapai-garuda-indonesia-airlines-logo-hd-png.png",
+            "routes": "IDN > AUS",
+            "location": "Bandara Soekarno-Hatta",
+            "price": 1680000
+        },
+        {
+            "id": "T2",
+            "name": "Garuda Airlines",
+            "photoUrl": "https://www.kindpng.com/picc/m/616-6164490_images-maskapai-garuda-indonesia-airlines-logo-hd-png.png",
+            "routes": "IDN > USA",
+            "location": "Bandara Soekarno-Hatta",
+            "price": 2155000
+        },
+        {
+            "id": "T3",
+            "name": "Lion Air",
+            "photoUrl": "https://play-lh.googleusercontent.com/mxpKkHprzlSw8RI-0lCqkTTuPFa38yD4bUuSZBPgMUmI0M-gQrkfjBR6GXhoNCB_trk",
+            "routes": "BDG > JKT",
+            "location": "Bandara Husein Sastranegara",
+            "price": 1550000
+        },
+        {
+            "id": "T4",
+            "name": "Lion Air",
+            "photoUrl": "https://play-lh.googleusercontent.com/mxpKkHprzlSw8RI-0lCqkTTuPFa38yD4bUuSZBPgMUmI0M-gQrkfjBR6GXhoNCB_trk",
+            "routes": "JKT > MDN",
+            "location": "Bandara Halim Perdanakusuma",
+            "price": 1877000
+        },
+        {
+            "id": "T5",
+            "name": "Singapore Airlines",
+            "photoUrl": "https://i.pinimg.com/originals/a6/a3/e2/a6a3e2e8d6f7d18d227f3ce86722ecc4.png",
+            "routes": "IDN > SG",
+            "location": "Bandara Soekarno-Hatta",
+            "price": 1680000
+        },
+        {
+            "id": "T6",
+            "name": "Singapore Airlines",
+            "photoUrl": "https://i.pinimg.com/originals/a6/a3/e2/a6a3e2e8d6f7d18d227f3ce86722ecc4.png",
+            "routes": "SG > MLY",
+            "location": "Singapore Changi Airport",
+            "price": 2674000
+        },
+        {
+            "id": "T7",
+            "name": "Air Asia",
+            "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/AirAsia_New_Logo.svg",
+            "routes": "IDN > LDN",
+            "location": "Bandara Soekarno-Hatta",
+            "price": 5600000
+        },
+        {
+            "id": "T8",
+            "name": "Citilink Airlines",
+            "photoUrl": "https://i.pinimg.com/originals/77/88/28/77882837bf9a0b4e016702dcde11a125.png",
+            "routes": "BDG > SBY",
+            "location": "Bandara Husein Sastranegara",
+            "price": 750000
+        },
+        {
+            "id": "T9",
+            "name": "Garuda Airlines",
+            "photoUrl": "https://www.kindpng.com/picc/m/616-6164490_images-maskapai-garuda-indonesia-airlines-logo-hd-png.png",
+            "routes": "IDN > KOR",
+            "location": "Bandara Soekarno-Hatta",
+            "price": 2650000
+        },
+        {
+            "id": "T10",
+            "name": "Citilink Airlines",
+            "photoUrl": "https://i.pinimg.com/originals/77/88/28/77882837bf9a0b4e016702dcde11a125.png",
+            "routes": "JKT > PDG",
+            "location": "Bandara Soekarno-Hatta",
+            "price": 900000
+        }
+    ]
+}

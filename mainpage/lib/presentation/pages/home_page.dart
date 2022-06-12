@@ -1,5 +1,11 @@
+import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:mainpage/data/models/hotel_model.dart';
+import 'package:mainpage/data/models/trip_model.dart';
+import 'package:mainpage/mainpage.dart';
+import 'package:mainpage/presentation/pages/details/trip_detail_screen.dart';
 
 import 'booked_page.dart';
 import 'search_page.dart';
@@ -148,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   icon: const Icon(Icons.airplane_ticket_sharp,
                       size: 50, color: backgroundPrimary2),
-                  onPressed: () => Navigator.pushNamed(context, ticketSearch),
+                  onPressed: () => Navigator.pushNamed(context, planeTicket),
                 ),
               ),
               Container(
@@ -186,104 +192,219 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(
-              'Popular',
+              'Hotel',
               style: kHeading6,
             ),
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: SizedBox(
-              height: 250,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: 10,
-                separatorBuilder: (context, index) {
-                  return const SizedBox(width: 12);
-                },
-                itemBuilder: (context, index) {
-                  return homeBuildCard(index);
-                },
-              ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            height: 250,
+            child: FutureBuilder<String>(
+              future: DefaultAssetBundle.of(context)
+                  .loadString('assets/local_hotel.json'),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  Map<String, dynamic> jsonMap = jsonDecode(snapshot.data!);
+                  final hotels = HotelModel.fromJson(jsonMap);
+
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: hotels.hotelItemsModel.length,
+                    itemBuilder: (context, index) {
+                      return _hotelCard(context, hotels.hotelItemsModel[index]);
+                    },
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(
-              'Recent Places',
+              'Trip',
               style: kHeading6,
             ),
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: SizedBox(
-              height: 250,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: 10,
-                separatorBuilder: (context, index) {
-                  return const SizedBox(width: 12);
-                },
-                itemBuilder: (context, index) {
-                  return homeBuildCard(index);
-                },
-              ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            height: 250,
+            child: FutureBuilder<String>(
+              future: DefaultAssetBundle.of(context)
+                  .loadString('assets/local_trip.json'),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  Map<String, dynamic> jsonMap = jsonDecode(snapshot.data!);
+                  final trips = TripModel.fromJson(jsonMap);
+
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: trips.trip.length,
+                    itemBuilder: (context, index) {
+                      return _tripCard(context, trips.trip[index]);
+                    },
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ],
       ),
     );
   }
-}
 
-Widget homeBuildCard(int index) => Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: 150,
-          width: 150,
-          decoration: BoxDecoration(
-            color: backgroundPrimary1,
-            borderRadius: BorderRadius.circular(15),
+  Widget _hotelCard(BuildContext context, HotelItemsModel hotel) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: SizedBox(
+        child: InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return DetailPage(hotel: hotel);
+            }),
           ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text('Floating Market Lembang', style: kBodyText),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber[400],
-                    ),
-                    Text('4.6', style: kBodyText),
-                  ],
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                child: CachedNetworkImage(
+                  imageUrl: hotel.photoUrl!,
+                  height: 125,
+                  width: 125,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
                 ),
               ),
               Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8),
                 alignment: Alignment.centerLeft,
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.price_change, color: Colors.amber[400]),
-                    Text('Rp. 124.999/pax', style: kBodyText),
+                    Text(hotel.name, style: kBodyText),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber[400],
+                              ),
+                              Text('${hotel.rating}', style: kBodyText),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.price_change,
+                                color: Colors.amber[400],
+                              ),
+                              Text('Rp. ${hotel.price}', style: kBodyText),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ],
+      ),
     );
+  }
+
+  Widget _tripCard(BuildContext context, TripItemsModel trip) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: SizedBox(
+        child: InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return TripDetailPage(trip: trip);
+            }),
+          ),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                child: CachedNetworkImage(
+                  imageUrl: trip.photoUrl!,
+                  height: 125,
+                  width: 125,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(trip.name, style: kBodyText),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber[400],
+                              ),
+                              Text('${trip.rating}', style: kBodyText),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.price_change,
+                                color: Colors.amber[400],
+                              ),
+                              Text('Rp. ${trip.price}', style: kBodyText),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

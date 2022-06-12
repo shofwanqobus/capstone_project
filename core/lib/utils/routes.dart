@@ -14,7 +14,7 @@ const ticketSearch = '/ticket';
 const bookedPage = '/booked';
 const userPage = '/user';
 const settingsPage = '/settings';
-const ticketList = '/ticket-list';
+const planeTicket = '/plane-ticket';
 
 const settingsLanguage = '/settings/language';
 const settingsAccount = '/settings/account';

@@ -17,6 +17,10 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.0.15
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  android_alarm_manager_plus: ^2.0.5
+  flutter_local_notifications: ^9.6.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -29,7 +33,9 @@ dev_dependencies:
 flutter:
   # To add assets to your package, add an assets section, like this:
   assets:
-    - assets/floating-market-lembang1.jpg
+    - assets/local_hotel.json
+    - assets/local_trip.json
+    - assets/local_ticket_pesawat.json
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see

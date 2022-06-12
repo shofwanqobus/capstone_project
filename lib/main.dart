@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mainpage/data/models/hotel_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,15 +31,19 @@ class MyApp extends StatelessWidget {
           case homePage:
             return MaterialPageRoute(builder: (_) => const HomePage());
           case detailPage:
-            return MaterialPageRoute(builder: (_) => const DetailPage());
+            return MaterialPageRoute(
+              builder: (_) => DetailPage(
+                hotel: ModalRoute.of(context)?.settings.arguments
+                    as HotelItemsModel,
+              ),
+              settings: settings,
+            );
           case paymentScreen:
             return MaterialPageRoute(builder: (_) => const PaymentPage());
           case paymentSucceed:
             return MaterialPageRoute(builder: (_) => const PaymentSucceed());
-          case tripDetail:
-            return MaterialPageRoute(builder: (_) => const TripDetailPage());
-          case ticketSearch:
-            return MaterialPageRoute(builder: (_) => const TicketSearch());
+          case planeTicket:
+            return MaterialPageRoute(builder: (_) => const Plane());
           case searchPage:
             return MaterialPageRoute(builder: (_) => const SearchPage());
           case bookedPage:
@@ -47,8 +52,6 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => const UserPage());
           case settingsPage:
             return MaterialPageRoute(builder: (_) => const SettingsPage());
-          case ticketList:
-            return MaterialPageRoute(builder: (_) => const TicketList());
 
           case settingsLanguage:
             return MaterialPageRoute(builder: (_) => const SettingsLanguage());

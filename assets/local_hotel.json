@@ -1,0 +1,314 @@
+{
+    "hotels": [
+        {
+            "id": "H1",
+            "name": "The Oberoi Lombok",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-1-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Resor mewah yang terletak di Teluk Medana di taman tropis seluas 10 hektare ini berjarak 5 km dari Lombok Golf Kosaido Country Club dan 8 km dari Pelabuhan Feri Bangsal.\n\nPaviliun luas yang beratap jerami menawarkan Wi-Fi gratis, TV layar datar, dok iPod, tempat tidur jati, dan area duduk. Semua kamar memiliki teras pribadi, pemandangan laut atau taman, dan kamar mandi marmer dengan bak mandi untuk berendam. Vila memiliki halaman pribadi dengan taman atau kolam renang.\n\nRestoran terbuka yang menyajikan masakan daerah dan Barat. Fasilitas lainnya meliputi kafe, bar, spa, pusat kebugaran, akses ke pantai pribadi, dan bak mandi air panas. Terdapat juga infinity pool dengan pemandangan pantai.",
+            "address": "Medana Beach, Tanjung, Lombok Utara,\nNusa Tenggara Barat, Indonesia, 83352",
+            "price": 4244291,
+            "rating": 4.6,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Layanan Binatu"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H2",
+            "name": "Intercontinental Bali Resort",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-2-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Resor ini berada di kawasan Uluwatu yang terkenal sebagai salah satu akomodasi yang mewah dan elegan. Terlindungi di tengah taman tropis yang asri dan di sisi pantai berpasir putih, Intercontinental Bali resort menawarkan suasana pedesaan khas Bali yang tenang dalam balutan kombinasi arsitektur tradisional dan fasilitas modern.\n\nTempat ini menjadi salah satu hotel termewah di Indonesia yang paling banyak diburu oleh wisatawan kelas atas. Intercontinental Bali Resort menyediakan 417 kamar hotel, suite, dan vila pribadi yang terbagi dalam enam sayap bangunan terpisah. Adapun desain kamar dari hotel mewah si Indonesia ini mengusung konsep klasik-modern yang hangat dan luks.",
+            "address": "Jalan Uluwatu 45, Jimbaran, Kuta Selatan,\nBali, Indonesia, 80361",
+            "price": 2915044,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H3",
+            "name": "Four Seasons Resort Bali",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-3-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Kendati dikelola oleh jaringan hotel berstandar internasional, Four Seasons resort Bali at Jimbaran Bay tetap menampilkan karakter Bali yang sangat kuat. Di lahan seluas 14 hektare ini, kamu akan mendapati resor yang didesain menyerupai desa tradisional Bali. Di sisi lain, salah satu hotel termewah di Indonesia ini juga menghadirkan pemandangan yang langsung menghadap ke sisi laut.\n\nFour Seasons Resort Bali at Jimbaran Bay mempunyai cukup banyak pilihan vila: Garden Villa, Jimbaran Bay Villa, Deluxe Villa, Premier Ocean Villa, family Premier Villa, Two-Bedroom Garden Villa, Two-Bedroom Jimbaran Bay Villa, Royal Villa, dan Imperial Three-Bedroom Villa. Ukuran tiap vila pun cukup luas, mulai dari 250m2 hingga 1.296 m2. Tak lupa, selain pengalaman menginap yang mewah, Four Seasons Resort Bali at Jimbaran Bay juga terkenal dengan restorannya, Sundara yang wajib dicicipi saat menginap di salah satu hotel paling mewah di Indonesia ini.",
+            "address": "Kuta Selatan, Jimbaran, Kuta Selatan,\nBali, Indonesia, 80361",
+            "price": 12173148,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H4",
+            "name": "Amanjiwo",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-4-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Hotel termewah di Indonesia berikutnya memiliki desain bangunan yang sangat unik. Arsitektur hotel mewah di Indonesia ini terinspirasi dari bentuk Candi Borobudur yang hanya berjarak sekitar 2 km dari Amanjiwo. Ditambah dengan penggunaan batu alam dan batu candi serta latar panorama berupa area persawahan, Bukit Menoreh, dan Borobudur, Amanjiwo tampak seperti istana megah ala kerajaan nusantara.\n\nAmanjiwo memiliki 36 suite pavilion dengan pilihan lima tipe,yakni Dalem Jiwo Suite, Borobudur Pool Suite, dan Garden Pool Suite, Borobudur Suite, dan Garden Suite. Masing-masing paviliun tersebut dilengkapi dengan private pool kecuali untuk Borobudur Suite dan Garden Suite. Adapun lokasi hotel mewah di Indonesia segala fasilitas kelas atas dan suasana yang sangat menyatu dengan alam ini berada di Desa Majaksingi, Borobudur, Magelang.",
+            "address": "Ds. Majaksingi Borobudur, Borobudur, Magelang,\nJawa Tengah, Indonesia, 56501",
+            "price": 13164320,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H5",
+            "name": "Alila Purnama",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-4.2-Alila-Hotels-scaled.jpg?tr=dpr-1,w-675",
+            "description": "Alila Purnama yang menawarkan pengalaman menginap yang berbeda. Hotel termewah di Indonesia dengan standar bintang 6 ini merupakan akomodasi di atas kapal pinisi yang terbuat dari bahan-bahan berkualitas lokal terbaik seperti kayu jati, rotan, dan lain-lain. Adapun jumlah tamu yang dapat diakomodasi di hotel mewah di Indonesia ini hanya sebanyak 10 orang dengan pilihan tipe kamar adalah 4 buah Double Deluxe Suite dan 1 Master Suite dengan dek pribadi.\n\nYang lebih menarik, kapal pinisi ini benar-benar melakukan pelayaran. kamu dapat menikmati pengalaman menginap sekaligus berlayar yang tak terlupakan bersama Alila Purnama dengan rute dari Pulau Komodo, Ambon, atau Raja Ampat.",
+            "address": "Jl. Eltari, Labuan Bajo, Batu Cermin,\nKomodo, Kabupaten Manggarai Barat, Nusa Tenggara Tim. 86554",
+            "price": 19575000,
+            "rating": 4,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H6",
+            "name": "Bawah Reserve",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-6.2-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Hotel termewah di Indonesia ini berada di Pulau Bawah, Kabupaten Kepulauan Anambas, Provinsi Riau Kepulauan. Untuk mencapai lokasi Bawah Reserve yang berada di antara Malaysia dan Kalimantan ini, kamu harus menggunakan private seaplane yang hanya berkapasitas maksimal sepuluh orang dan melewati gugusan pulau kecil di perairan Natuna. Dari sini pun, kamu sudah bisa membayangkan betapa eksklusifnya penginapan mewah di Indonesia yang satu ini, bukan?\n\nJauh dari kebisingan kota, Bawah Reserve menawarkan hanya 35 bungalo dengan pilihan tipe Garden Suite, Beach Suite, Overwater Bungalow, dan Deluxe Beach Suite. Tidak semua pilihan unit di hotel mewah ini mendapat akses langsung ke pantai yang sangat bersih dan berpasir putih. Kendati demikian, penataan taman yang begitu apik dengan beberapa fasilitas mewah lainnya menjadi pemandangan tersendiri yang tak kalah cantik dari dalam bungalo.",
+            "address": "Bawah Reserve Anambas Kiabu,\nKepulauan Riau, Indonesia, 29791",
+            "price": 34380904,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H7",
+            "name": "Nihi Sumba",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-7.3-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Nihi Sumba berhasil mendapat predikat #1 Hotel in The World dari majalah Travel + Leisure berturut-turut di tahun 2016 dan 2017. Berada di Pulau Sumba yang eksotis, hotel termewah di Indonesia yang satu ini menjadi salah satu resor mewah favorit bagi kalangan jetset untuk sejenak menyepi dari rutinitas.\n\nSalah satu hotel termewah yang ada di Indonesia ini mempunyai 28 vila dengan bangunan yang dibuat oleh para seniman lokal menggunakan rotan dan jati. Resor ini menyediakan lima tipe vila, yakni Marangga, Mandaka, Puncak, Haweri, dan Mamole Tree House. Masing-masing unit ini memiliki pemandangan dan keunggulan berbeda, seperti paviliun yoga pribadi, pemandangan laut biru di hampir seluruh penjuru vila, dan lain-lain.",
+            "address": "Desa Hobawawi, Lamboya, Sumba Barat,\nNusa Tenggara Timur, Indonesia, 87272",
+            "price": 19884000,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H8",
+            "name": "The Mulia, Nusa Dua",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-8-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Kebanyakan hotel termewah di Indonesia berlokasi di pulau Dewata. Hal ini dikarenakan Bali menjadi destinasi wisata favorit yang telah mendunia. Salah satu hotel termewah di Indonesia yang ada di Bali lainnya adalah The Mulia yang berlokasi di kawasan Nusa Dua.\n\nSaking mewahnya, The Mulia sudah sering disandingkan dengan hotel-hotel mewah dari luar Indonesia, lho. Selain fasilitas yang mewah dan eksklusif, pemandangan dan arsitektur yang ditawarkan oleh hotel mewah di Indonesia satu ini juga sangat stunning dan mengagumkan!",
+            "address": "Jalan Raya Nusa Dua Selatan, Kawasan Sawangan,\nNusa Dua 80363, Bali, Indonesia",
+            "price": 7986000,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H9",
+            "name": "Banyan Tree Ungasan",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-9-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Masih berada di Bali, tepatnya Uluwatu, hotel paling mewah di Indonesia lainnya adalah Banyan Tree Ungasan yang menjadi salah satu dari tiga hotel indonesia yang terpilih Hotel dan Spa Termewah di Dunia pada 2018 versi Forbes Travel Guide.\n\nMulai dari pantai pribadi, hot tub, hingga sauna menjadi beberapa contoh fasilitas mewah yang bisa kamu coba saat bermalam di hotel mewah di Indonesia satu ini.",
+            "address": "Jl. Melasti, Banjar Kelod, Ungasan, Uluwatu,\nKuta Selatan, Bali, Indonesia, 80364",
+            "price": 10497996,
+            "rating": 4.6,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "H10",
+            "name": "W Retreat & Spa Bali",
+            "photoUrl": "https://ik.imagekit.io/tvlk/blog/2020/01/hotel-termewah-di-Indonesia-10-Traveloka.jpg?tr=dpr-1,w-675",
+            "description": "Terakhir, tak lengkap rasanya mengulashotel termewah di Indonesia tanpa menyebut W Retreat & Spa Bali. Penginapan mewah ini berada di kawasan Seminyak yang populer di kalangan turis kelas atas. Rasa mewah dengan kesan tropis ini pun akan terasa sejak kamu melalui deretan pohon bambu yang ditata sangat rapi hingga menyerupai terowongan.\n\nW Retreat & Spa Bali memiliki 229 kamar, suite, dan vila dengan kemewahan dan fasilitas modern dam romantis yang tak perlu diragukan. Desain penginapan kelas atas ini juga memberi kesan yang sangat hangat dan homey dengan penggunaan beberapa bahan klasik seperti teraso dan kayu. Tak lupa, kamu juga akan menemukan perpaduan taman tropis yang menyejukkan serta pantai cantik di sisi belakang hotel paling mewah di Indonesia satu ini",
+            "address": "Jl. Petitenget, Kerobokan, Seminyak,\nKuta, Bali, Indonesia, 80361",
+            "price": 5445000,
+            "rating": 4.7,
+            "accomodations": {
+                "availableAccomodations": [
+                    {
+                        "accomodations": "Wifi Gratis"
+                    },
+                    {
+                        "accomodations": "Sarapan Gratis"
+                    },
+                    {
+                        "accomodations": "Parkir Gratis"
+                    },
+                    {
+                        "accomodations": "Kolam Renang Luar"
+                    },
+                    {
+                        "accomodations": "AC"
+                    },
+                    {
+                        "accomodations": "Dapat Diakses"
+                    }
+                ]
+            }
+        }
+    ]
+}

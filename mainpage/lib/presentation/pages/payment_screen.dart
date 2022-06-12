@@ -190,7 +190,7 @@ class _PaymentPage extends State<PaymentPage> {
             Center(
               child: Container(
                 height: 150,
-                width: 400,
+                width: 300,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
