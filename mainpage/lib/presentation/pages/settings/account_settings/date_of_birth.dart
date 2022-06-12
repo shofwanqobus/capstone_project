@@ -6,14 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsAccountChangeDateOfBirth extends StatelessWidget {
+class SettingsAccountChangeDateOfBirth extends StatefulWidget {
   const SettingsAccountChangeDateOfBirth({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsAccountChangeDateOfBirth> createState() =>
+      _SettingsAccountChangeDateOfBirthState();
+}
+
+class _SettingsAccountChangeDateOfBirthState
+    extends State<SettingsAccountChangeDateOfBirth> {
+  late bool inputError = false;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
-
-    TextEditingController controller = TextEditingController();
 
     return Scaffold(
       appBar: settingsAccountAppBar(),
@@ -38,10 +46,17 @@ class SettingsAccountChangeDateOfBirth extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: TextField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                if (inputError) {
+                  setState(() {
+                    inputError = false;
+                  });
+                }
+              },
               controller: controller,
               key: const Key('Date of Birth'),
               decoration: InputDecoration(
+                errorText: inputError ? "Date is invalid" : null,
                 hintText: '20 January 2004',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -54,6 +69,14 @@ class SettingsAccountChangeDateOfBirth extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               final newValue = controller.text;
+
+              if (newValue.isEmpty) {
+                setState(() {
+                  inputError = true;
+                });
+                return;
+              }
+
               final prefs = await SharedPreferences.getInstance();
               final data = json.decode(prefs.getString("data")!);
               final email = data["email"];
@@ -64,6 +87,12 @@ class SettingsAccountChangeDateOfBirth extends StatelessWidget {
               }, onError: (e) {
                 print(e);
               });
+
+              const snackBar = SnackBar(
+                content: Text("Date of Birth updated"),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
               Navigator.pop(context);
             },

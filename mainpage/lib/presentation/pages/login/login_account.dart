@@ -17,8 +17,19 @@ class _LoginAccount extends State<LoginAccount> {
   final _auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
 
-  late String email;
-  late String password;
+  late bool signInLoading = false;
+
+  TextEditingController emailController = TextEditingController();
+  late bool emailError = false;
+  late String emailErrorMessage = "";
+
+  TextEditingController passwordController = TextEditingController();
+  late bool passwordError = false;
+  late String passwordErrorMessage = "";
+  late bool showPassword = false;
+
+  late bool authError = false;
+  late String authErrorMessage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +73,16 @@ class _LoginAccount extends State<LoginAccount> {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
+            if (authError)
+              Text(
+                authErrorMessage,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(top: 16, left: 52, bottom: 4),
@@ -75,10 +95,17 @@ class _LoginAccount extends State<LoginAccount> {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 onChanged: (query) {
-                  email = query;
+                  if (emailError) {
+                    setState(() {
+                      emailError = false;
+                      emailErrorMessage = "";
+                    });
+                  }
                 },
+                controller: emailController,
                 key: const Key('email'),
                 decoration: InputDecoration(
+                  errorText: emailErrorMessage != "" ? emailErrorMessage : null,
                   hintText: 'Email...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -99,10 +126,20 @@ class _LoginAccount extends State<LoginAccount> {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 onChanged: (query) {
-                  password = query;
+                  if (passwordError) {
+                    setState(() {
+                      passwordError = false;
+                      passwordErrorMessage = "";
+                    });
+                  }
                 },
+                controller: passwordController,
                 key: const Key('password'),
+                obscureText: !showPassword,
+                textAlign: TextAlign.left,
                 decoration: InputDecoration(
+                  errorText:
+                      passwordErrorMessage != "" ? passwordErrorMessage : null,
                   hintText: 'Password...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -111,10 +148,54 @@ class _LoginAccount extends State<LoginAccount> {
                 textInputAction: TextInputAction.send,
               ),
             ),
-            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: showPassword,
+                    onChanged: (value) {
+                      setState(() {
+                        showPassword = value!;
+                      });
+                    },
+                  ),
+                  const Text("Show Password")
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () async {
                 try {
+                  setState(() => signInLoading = true);
+
+                  final email = emailController.text;
+                  final password = passwordController.text;
+
+                  if (!email.contains("@") || email.isEmpty) {
+                    setState(() {
+                      emailError = true;
+                      emailErrorMessage = "Email is invalid";
+                    });
+                  }
+
+                  if (password.length < 6) {
+                    passwordError = true;
+                    passwordErrorMessage =
+                        "Password must contains at least 6 characters";
+                  } else if (password.isEmpty) {
+                    setState(() {
+                      passwordError = true;
+                      passwordErrorMessage = "Password is invalid";
+                    });
+                  }
+
+                  if (emailError || passwordError) {
+                    setState(() => signInLoading = false);
+                    return;
+                  }
+
                   final prefs = await SharedPreferences.getInstance();
 
                   // used when removing the account from the plaform
@@ -137,13 +218,40 @@ class _LoginAccount extends State<LoginAccount> {
                     // onError: (e) => print("Error getting document: $e"),
                   );
 
+                  setState(() => signInLoading = false);
+
+                  emailController.clear();
+                  passwordController.clear();
+
+                  if (authError) {
+                    setState(() {
+                      authError = false;
+                      authErrorMessage = "";
+                    });
+                  }
+
                   Navigator.pushNamed(context, homePage);
-                } catch (e) {
+                } on FirebaseAuthException catch (e) {
                   // TODO: Error message, example: invalid email, invalid password, user not registered, ...
-                  // print(e);
+                  print("login error: $e");
+                  print("error code: ${e.code}");
+
+                  if (e.code == "user-not-found") {
+                    setState(() {
+                      authError = true;
+                      authErrorMessage = "User not found";
+                      signInLoading = false;
+                    });
+                  }
+                } catch (e) {
+                  //
                 }
               },
-              child: Text('Log In', style: button),
+              child: signInLoading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : Text('Log In', style: button),
               style: ElevatedButton.styleFrom(
                 elevation: 2,
                 shadowColor: Colors.black,

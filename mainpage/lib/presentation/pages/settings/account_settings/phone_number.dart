@@ -6,14 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsAccountChangePhoneNumber extends StatelessWidget {
+class SettingsAccountChangePhoneNumber extends StatefulWidget {
   const SettingsAccountChangePhoneNumber({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsAccountChangePhoneNumber> createState() =>
+      _SettingsAccountChangePhoneNumberState();
+}
+
+class _SettingsAccountChangePhoneNumberState
+    extends State<SettingsAccountChangePhoneNumber> {
+  late bool inputError = false;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
-
-    TextEditingController controller = TextEditingController();
 
     return Scaffold(
       appBar: settingsAccountAppBar(),
@@ -38,10 +46,17 @@ class SettingsAccountChangePhoneNumber extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: TextField(
-              onChanged: (value) {},
+              onChanged: (value) {
+                if (inputError) {
+                  setState(() {
+                    inputError = false;
+                  });
+                }
+              },
               controller: controller,
               key: const Key('Phone Number'),
               decoration: InputDecoration(
+                errorText: inputError ? "Phone Number is invalid" : null,
                 hintText: '08xx...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -54,6 +69,14 @@ class SettingsAccountChangePhoneNumber extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               final newValue = controller.text;
+
+              if (newValue.isEmpty) {
+                setState(() {
+                  inputError = true;
+                });
+                return;
+              }
+
               final prefs = await SharedPreferences.getInstance();
               final data = json.decode(prefs.getString("data")!);
               final email = data["email"];
@@ -64,6 +87,12 @@ class SettingsAccountChangePhoneNumber extends StatelessWidget {
               }, onError: (e) {
                 print(e);
               });
+
+              const snackBar = SnackBar(
+                content: Text("Phone Number updated"),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
               Navigator.pop(context);
             },

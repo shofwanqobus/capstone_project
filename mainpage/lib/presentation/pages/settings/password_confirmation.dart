@@ -6,15 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsPasswordConfirmation extends StatelessWidget {
+class SettingsPasswordConfirmation extends StatefulWidget {
   const SettingsPasswordConfirmation({Key? key}) : super(key: key);
 
   @override
+  State<SettingsPasswordConfirmation> createState() =>
+      _SettingsPasswordConfirmationState();
+}
+
+class _SettingsPasswordConfirmationState
+    extends State<SettingsPasswordConfirmation> {
+  late bool loading = false;
+  late String confirmPassword = "";
+  late bool confimPasswordError = false;
+  late String confimPasswordErrorMessage = "";
+  late bool showPassword = false;
+
+  @override
   Widget build(BuildContext context) {
-    String confirmPassword = "";
-
-    final _auth = FirebaseAuth.instance;
-
     return Scaffold(
       backgroundColor: backgroundPrimary2,
       appBar: homeAppBar(),
@@ -39,9 +48,22 @@ class SettingsPasswordConfirmation extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: TextField(
-              onChanged: (value) => confirmPassword = value,
+              onChanged: (value) {
+                confirmPassword = value;
+
+                if (confimPasswordError) {
+                  setState(() {
+                    confimPasswordError = false;
+                    confimPasswordErrorMessage = "";
+                  });
+                }
+              },
               key: const Key('Confirm Password'),
+              obscureText: !showPassword,
               decoration: InputDecoration(
+                errorText: confimPasswordErrorMessage != ""
+                    ? confimPasswordErrorMessage
+                    : null,
                 hintText: 'Confirm password...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -50,15 +72,51 @@ class SettingsPasswordConfirmation extends StatelessWidget {
               textInputAction: TextInputAction.send,
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Row(
+              children: [
+                Checkbox(
+                  value: showPassword,
+                  onChanged: (value) {
+                    setState(() {
+                      showPassword = value!;
+                    });
+                  },
+                ),
+                const Text("Show Password")
+              ],
+            ),
+          ),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () async {
               try {
+                setState(() => loading = true);
+
+                if (confirmPassword.length < 6) {
+                  confimPasswordError = true;
+                  confimPasswordErrorMessage =
+                      "Password must contains at least 6 characters";
+                } else if (confirmPassword == "") {
+                  setState(() {
+                    confimPasswordError = true;
+                    confimPasswordErrorMessage = "Password is invalid";
+                  });
+                }
+
+                if (confimPasswordError) {
+                  setState(() => loading = false);
+                  return;
+                }
+
                 final prefs = await SharedPreferences.getInstance();
                 final data = json.decode(prefs.getString("data")!);
                 final password = data["password"];
 
                 if (password != confirmPassword) throw "Password incorrect!";
+
+                setState(() => loading = false);
 
                 Navigator.pop(context);
                 Navigator.pushNamed(context, settingsAccount);
@@ -66,7 +124,11 @@ class SettingsPasswordConfirmation extends StatelessWidget {
                 print(e);
               }
             },
-            child: Text('Submit', style: button),
+            child: loading
+                ? const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                : Text('Submit', style: button),
             style: ElevatedButton.styleFrom(
               elevation: 2,
               shadowColor: Colors.black,

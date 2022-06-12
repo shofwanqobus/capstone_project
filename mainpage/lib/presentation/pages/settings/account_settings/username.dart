@@ -6,14 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsAccountChangeUsername extends StatelessWidget {
+class SettingsAccountChangeUsername extends StatefulWidget {
   const SettingsAccountChangeUsername({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsAccountChangeUsername> createState() =>
+      _SettingsAccountChangeUsernameState();
+}
+
+class _SettingsAccountChangeUsernameState
+    extends State<SettingsAccountChangeUsername> {
+  late bool inputError = false;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
-
-    TextEditingController controller = TextEditingController();
 
     return Scaffold(
       appBar: settingsAccountAppBar(),
@@ -38,10 +46,17 @@ class SettingsAccountChangeUsername extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: TextField(
-              onChanged: (value) async {},
+              onChanged: (value) {
+                if (inputError) {
+                  setState(() {
+                    inputError = false;
+                  });
+                }
+              },
               controller: controller,
               key: const Key('New Username'),
               decoration: InputDecoration(
+                errorText: inputError ? "Username is invalid" : null,
                 hintText: 'username...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -53,19 +68,37 @@ class SettingsAccountChangeUsername extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () async {
-              final newValue = controller.text;
-              final prefs = await SharedPreferences.getInstance();
-              final data = json.decode(prefs.getString("data")!);
-              final email = data["email"];
+              try {
+                final newValue = controller.text;
 
-              final docRefs = db.collection("users").doc(email);
-              docRefs.update({"username": newValue}).then((value) {
-                print('username updated');
-              }, onError: (e) {
+                if (newValue.isEmpty) {
+                  setState(() {
+                    inputError = true;
+                  });
+                  return;
+                }
+
+                final prefs = await SharedPreferences.getInstance();
+                final data = json.decode(prefs.getString("data")!);
+                final email = data["email"];
+
+                final docRefs = db.collection("users").doc(email);
+                docRefs.update({"username": newValue}).then((value) {
+                  print('username updated');
+                }, onError: (e) {
+                  print(e);
+                });
+
+                const snackBar = SnackBar(
+                  content: Text("username updated"),
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                Navigator.pop(context);
+              } catch (e) {
                 print(e);
-              });
-
-              Navigator.pop(context);
+              }
             },
             child: Text('Submit', style: button),
             style: ElevatedButton.styleFrom(

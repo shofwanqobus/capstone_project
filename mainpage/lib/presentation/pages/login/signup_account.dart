@@ -14,12 +14,27 @@ class _SignUpAccount extends State<SignUpAccount> {
   final _auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance;
 
-  late String username;
-  late String email;
-  late String password;
-  late String phoneNumber;
-  late String dateOfBirth;
+  late bool signUpLoading = false;
+
+  late String username = "";
+  late bool usernameError = false;
+
+  late String email = "";
+  late bool emailError = false;
+
+  late String password = "";
+  late bool passwordError = false;
+  late String passwordErrorMessage = "";
+  late bool showPassword = false;
+
+  late String phoneNumber = "";
+  late bool phoneNumberError = false;
+
+  late String dateOfBirth = "";
+  late bool dateOfBirthError = false;
+
   late bool checkbox = false;
+  late bool checkboxError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +89,15 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) => username = query,
+                onChanged: (query) {
+                  username = query;
+                  if (usernameError) {
+                    setState(() => usernameError = false);
+                  }
+                },
                 key: const Key('username'),
                 decoration: InputDecoration(
+                  errorText: usernameError ? "Username is invalid" : null,
                   hintText: 'Username...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -96,11 +117,15 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (value) {
-                  email = value;
+                onChanged: (query) {
+                  email = query;
+                  if (emailError) {
+                    setState(() => emailError = false);
+                  }
                 },
                 key: const Key('email'),
                 decoration: InputDecoration(
+                  errorText: emailError ? "Email is invalid" : null,
                   hintText: 'E-mail...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -120,17 +145,42 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (value) {
-                  password = value;
+                onChanged: (query) {
+                  password = query;
+                  if (passwordError) {
+                    setState(() {
+                      passwordErrorMessage = "";
+                      passwordError = false;
+                    });
+                  }
                 },
                 key: const Key('password'),
+                obscureText: !showPassword,
                 decoration: InputDecoration(
+                  errorText:
+                      passwordErrorMessage != "" ? passwordErrorMessage : null,
                   hintText: 'Password...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
                 textInputAction: TextInputAction.send,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: showPassword,
+                    onChanged: (value) {
+                      setState(() {
+                        showPassword = value!;
+                      });
+                    },
+                  ),
+                  const Text("Show Password")
+                ],
               ),
             ),
             Container(
@@ -144,9 +194,16 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) => phoneNumber = query,
+                onChanged: (query) {
+                  phoneNumber = query;
+                  if (phoneNumberError) {
+                    setState(() => phoneNumberError = false);
+                  }
+                },
                 key: const Key('phone-number'),
                 decoration: InputDecoration(
+                  errorText:
+                      phoneNumberError ? "Phone Number is invalid" : null,
                   hintText: 'Phone Number...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -166,9 +223,16 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) => dateOfBirth = query,
+                onChanged: (query) {
+                  dateOfBirth = query;
+                  if (dateOfBirthError) {
+                    setState(() => dateOfBirthError = false);
+                  }
+                },
                 key: const Key('date-of-birth'),
                 decoration: InputDecoration(
+                  errorText:
+                      dateOfBirthError ? "Date of Birth is invalid" : null,
                   hintText: 'DD/MM/YYYY...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -189,29 +253,71 @@ class _SignUpAccount extends State<SignUpAccount> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(left: 36),
-                  child: Checkbox(
-                    value: checkbox,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          checkbox = value!;
-                        },
-                      );
-                    },
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      unselectedWidgetColor:
+                          checkboxError ? Colors.red : Colors.black54,
+                    ),
+                    child: Checkbox(
+                      value: checkbox,
+                      onChanged: (value) {
+                        setState(() => checkbox = value!);
+
+                        if (checkboxError) {
+                          setState(() => checkboxError = false);
+                        }
+                      },
+                    ),
                   ),
                 ),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Text('I have agreed with terms & conditions',
-                      style: kBodyText),
+                Text(
+                  'I have agreed with terms & conditions',
+                  style: kBodyText,
                 ),
               ],
             ),
             ElevatedButton(
               onPressed: () async {
                 try {
-                  if (!checkbox) throw "terms and conditions is a requirement";
+                  setState(() => signUpLoading = true);
+
+                  if (username == "") {
+                    setState(() => usernameError = true);
+                  }
+                  if (email == "") {
+                    setState(() => emailError = true);
+                  }
+                  if (password.length < 6) {
+                    setState(() {
+                      passwordErrorMessage =
+                          "Password must contains at least 6 character";
+                      passwordError = true;
+                    });
+                  } else if (password == "") {
+                    setState(() {
+                      passwordErrorMessage = "Password is invalid";
+                      passwordError = true;
+                    });
+                  }
+                  if (phoneNumber == "") {
+                    setState(() => phoneNumberError = true);
+                  }
+                  if (dateOfBirth == "") {
+                    setState(() => dateOfBirthError = true);
+                  }
+                  if (!checkbox) {
+                    setState(() => checkboxError = true);
+                  }
+
+                  if (usernameError ||
+                      emailError ||
+                      passwordError ||
+                      phoneNumberError ||
+                      dateOfBirthError ||
+                      checkboxError) {
+                    setState(() => signUpLoading = false);
+                    return;
+                  }
 
                   final newUser = await _auth.createUserWithEmailAndPassword(
                     email: email,
@@ -229,13 +335,25 @@ class _SignUpAccount extends State<SignUpAccount> {
 
                   _db.collection("users").doc(email).set(insertUser);
 
+                  const snackBar = SnackBar(
+                    content: Text("Account successfully created"),
+                  );
+
+                  setState(() => signUpLoading = false);
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                   Navigator.pushNamed(context, logInAccount);
                 } catch (e) {
-                  // TODO: Error message, example: checkbox not checked, email poorly written, password lesser than 6, ...
-                  // print(e);
+                  // TODO: Error message, example: email poorly written, ...
+                  print("signup error: $e");
                 }
               },
-              child: Text('Create Account', style: button),
+              child: signUpLoading
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : Text('Create Account', style: button),
               style: ElevatedButton.styleFrom(
                 elevation: 2,
                 shadowColor: Colors.black,
