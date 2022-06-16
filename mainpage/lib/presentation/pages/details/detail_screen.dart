@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
+import 'package:mainpage/presentation/provider/database_provider.dart';
+import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key, required this.hotel}) : super(key: key);
@@ -10,6 +13,24 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DatabaseProvider>(
+          create: (_) => DatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+        ChangeNotifierProvider<FavDatabaseProvider>(
+          create: (_) => FavDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+      ],
+      child: Scaffold(body: _details(context)),
+    );
+  }
+
+  Widget _details(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -40,15 +61,31 @@ class DetailPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Colors.white54,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.favorite_outline_outlined,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {},
-                    ),
+                  Consumer<FavDatabaseProvider>(
+                    builder: (context, provider, child) {
+                      return FutureBuilder<bool>(
+                        future: provider.isFavorited(hotel.id),
+                        builder: ((context, snapshot) {
+                          var isFavorited = snapshot.data ?? false;
+                          return CircleAvatar(
+                            backgroundColor: Colors.white54,
+                            child: isFavorited
+                                ? IconButton(
+                                    icon: const Icon(Icons.favorite),
+                                    color: Colors.red,
+                                    onPressed: () =>
+                                        provider.removeFavoriteHotel(hotel.id),
+                                  )
+                                : IconButton(
+                                    icon: const Icon(Icons.favorite_border),
+                                    color: Colors.red,
+                                    onPressed: () =>
+                                        provider.addFavoritedHotel(hotel),
+                                  ),
+                          );
+                        }),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -144,16 +181,25 @@ class DetailPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () =>
-                                  Navigator.pushNamed(context, paymentScreen),
-                              child: Text('Book Now', style: textButton2),
-                              style: ElevatedButton.styleFrom(
-                                elevation: 2,
-                                shadowColor: Colors.black,
-                                primary: backgroundPrimary1,
-                                minimumSize: const Size(60, 60),
-                              ),
+                            Consumer<DatabaseProvider>(
+                              builder: (context, provider, child) {
+                                return FutureBuilder<bool>(
+                                    future: provider.isBooked(hotel.id),
+                                    builder: (context, snapshot) {
+                                      return ElevatedButton(
+                                        onPressed: () =>
+                                            provider.bookedHotel(hotel),
+                                        child: Text('Book Now',
+                                            style: textButton2),
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 2,
+                                          shadowColor: Colors.black,
+                                          primary: backgroundPrimary1,
+                                          minimumSize: const Size(60, 60),
+                                        ),
+                                      );
+                                    });
+                              },
                             ),
                           ],
                         ),

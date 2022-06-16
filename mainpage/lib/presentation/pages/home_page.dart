@@ -7,11 +7,6 @@ import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:mainpage/presentation/pages/details/trip_detail_screen.dart';
 
-import 'booked_page.dart';
-import 'search_page.dart';
-import 'settings_page.dart';
-import 'user_page.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 

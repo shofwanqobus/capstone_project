@@ -1,5 +1,10 @@
-import 'package:core/styles/colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:mainpage/data/models/hotel_model.dart';
+import 'package:mainpage/presentation/pages/details/detail_screen.dart';
+import 'package:mainpage/presentation/provider/database_provider.dart';
+import 'package:provider/provider.dart';
 
 class BookedPage extends StatefulWidget {
   const BookedPage({Key? key}) : super(key: key);
@@ -116,98 +121,108 @@ class BookedButton extends StatelessWidget {
 class PlaceTab extends StatelessWidget {
   const PlaceTab({Key? key}) : super(key: key);
 
-  final String img =
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.oGNH9MlCWNWOEUSwnT51ewHaFV%26pid%3DApi&f=1";
-  final String date = "Jumat, 22 Agustus 2022";
-  final String time = "14:04";
-  final String title = "South East America";
-  final double rating = 4.4;
-  final String price = "Rp. 20.000,00";
-  final bool booked = true;
-
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 0.0, vertical: 12.0),
-            child: InkWell(
-              onTap: () {},
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                        ),
-                        // child: Image.network(
-                        //   img,
-                        //   width: 80.0,
-                        //   height: 80.0,
-                        // ),
-                        //   child: Container(
-                        //     decoration: const BoxDecoration(
-                        //       color: backgroundPrimary1,
-                        //     ),
-                        //     width: 80.0,
-                        //     height: 80.0,
-                        //     margin: const EdgeInsets.all(8.0),
-                        //   ),
-                        child: const Placeholder(
-                          fallbackWidth: 80,
-                          fallbackHeight: 80,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DatabaseProvider>(
+          create: (_) => DatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+      ],
+      child: Scaffold(body: _listBooked(context)),
+    );
+  }
+
+  Widget _listBooked(BuildContext context) {
+    return Consumer<DatabaseProvider>(
+      builder: (context, provider, child) {
+        if (provider.state == ResultState.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (provider.state == ResultState.hasData) {
+          return ListView.builder(
+            itemCount: provider.booked.length,
+            itemBuilder: (context, index) {
+              return _bookedHotel(
+                provider.booked[index],
+              );
+            },
+          );
+        } else if (provider.state == ResultState.noData) {
+          return Center(child: Text(provider.message));
+        } else if (provider.state == ResultState.error) {
+          return Center(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 250),
+                  child: Icon(Icons.wifi_off, size: 50),
+                ),
+                Text(
+                  provider.message,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          );
+        } else {
+          return const Center(
+            child: Text(''),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _bookedHotel(HotelItemsModel hotel) {
+    return Consumer<DatabaseProvider>(builder: (context, provider, child) {
+      return FutureBuilder<bool>(
+        future: provider.isBooked(hotel.id),
+        builder: (context, snapshot) {
+          return Material(
+            child: ListTile(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              leading: Hero(
+                tag: hotel.photoUrl!,
+                child: CachedNetworkImage(
+                  imageUrl: hotel.photoUrl!,
+                  width: 100,
+                ),
+              ),
+              title: Container(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 2,
+                  bottom: 4,
+                ),
+                child: Text(hotel.name),
+              ),
+              subtitle: Container(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Row(
                         children: [
-                          Text(date),
-                          Text(time),
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.bodyLarge,
+                          const Icon(
+                            Icons.price_change,
+                            size: 15,
                           ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.amber[400],
-                              ),
-                              Text(rating.toString()),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.price_change,
-                                color: Colors.amber[400],
-                              ),
-                              Text(price),
-                            ],
-                          ),
+                          Text('${hotel.price}'),
                         ],
                       ),
-                      BookedButton(status: booked),
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.grey,
-                    height: 20,
-                    thickness: 1,
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
         },
-      ),
-    );
+      );
+    });
   }
 }
 

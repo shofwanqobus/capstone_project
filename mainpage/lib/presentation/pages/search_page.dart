@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -11,10 +13,28 @@ class _SearchPageState extends State<SearchPage> {
   late TextEditingController _controller;
   var textInput = "";
 
+  List hotels = [];
+  List trips = [];
+
+  void loadData() async {
+    String hotelJsonStr =
+        await rootBundle.loadString('assets/local_hotel.json');
+    String tripJsonStr = await rootBundle.loadString('assets/local_trip.json');
+    var hotelJson = jsonDecode(hotelJsonStr);
+    var tripJson = jsonDecode(tripJsonStr);
+
+    hotels = hotelJson;
+    trips = tripJson;
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
+
+    loadData();
   }
 
   @override

@@ -29,9 +29,7 @@ class UserFavorite extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: const [
-                  PlaceCard(),
-                  PlaceCard(),
-                  PlaceCard(),
+                  HotelPlaceCard(),
                 ],
               ),
             ),

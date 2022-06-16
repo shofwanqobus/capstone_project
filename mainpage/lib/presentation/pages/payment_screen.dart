@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:mainpage/data/models/hotel_model.dart';
+import 'package:mainpage/data/models/trip_model.dart';
+import 'package:mainpage/data/models/plane_ticket_model.dart';
 
-class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+class HotelPaymentPage extends StatefulWidget {
+  const HotelPaymentPage({Key? key}) : super(key: key);
 
   @override
-  _PaymentPage createState() => _PaymentPage();
+  _HotelPaymentPage createState() => _HotelPaymentPage();
 }
 
-class _PaymentPage extends State<PaymentPage> {
+class _HotelPaymentPage extends State<HotelPaymentPage> {
   TextEditingController controller = TextEditingController();
   int? _radioValue = 1;
   int administration = 5000;

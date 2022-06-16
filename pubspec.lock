@@ -127,13 +127,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  dartz:
-    dependency: transitive
-    description:
-      name: dartz
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.1"
   date_range_form_field:
     dependency: transitive
     description:
@@ -324,13 +317,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  login:
-    dependency: "direct main"
-    description:
-      path: login
-      relative: true
-    source: path
-    version: "0.0.1"
   mainpage:
     dependency: "direct main"
     description:
