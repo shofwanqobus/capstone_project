@@ -37,7 +37,10 @@ class FavDatabaseProvider extends ChangeNotifier {
 
   Future<bool> isFavorited(String id) async {
     final favHotel = await databaseHelper.getFavHotelById(id);
-    return favHotel!.isNotEmpty;
+    if (favHotel == null) {
+      return false;
+    }
+    return favHotel.isNotEmpty;
   }
 
   void addFavoritedHotel(HotelItemsModel hotel) async {

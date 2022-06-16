@@ -37,7 +37,10 @@ class DatabaseProvider extends ChangeNotifier {
 
   Future<bool> isBooked(String id) async {
     final bookedHotel = await databaseHelper.getHotelById(id);
-    return bookedHotel!.isNotEmpty;
+    if (bookedHotel == null) {
+      return false;
+    }
+    return bookedHotel.isNotEmpty;
   }
 
   void bookedHotel(HotelItemsModel hotel) async {
