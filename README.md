@@ -9,12 +9,16 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 # Resources
 
 ## Tools
-- Visual Code Studio
+- Visual Studio Code
 
-## Bahasa Pemrograman & MarkUp
-- Dart
+# Framework
 - Flutter
 
-## Library
-- Firebase
+# State Management
+- Provider
 
+## Bahasa Pemrograman
+- Dart
+
+## Teknologi yang Digunakan
+- Firebase
