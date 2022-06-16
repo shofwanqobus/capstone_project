@@ -4,7 +4,9 @@ This project is made as a capstone project in MSIB (_Magang dan Studi Independen
 Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik itu hotel dan melakukan trip wisata. Selain itu, adapun fitur tiket pesawat bagi wisatawan yang ingin berlibur ke sebuah negara.
 
 ## Implemented Features
-- Authentication and user database using Firebase
+- Authentication
+- Favorite a Place/Trip/Hotel/...
+- ...
 
 # Resources
 
