@@ -1,16 +1,19 @@
-import 'package:equatable/equatable.dart';
-import 'package:mainpage/domain/entities/trip.dart';
-
-class TripModel extends Equatable {
+class TripModel {
   List<TripItemsModel> trip;
 
   TripModel({required this.trip});
 
   factory TripModel.fromJson(Map<String, dynamic> json) => TripModel(
         trip: List<TripItemsModel>.from(
-          json["trips"].map(
-            (x) => TripItemsModel.fromJson(x),
-          ),
+          (json["trips"] as List).map((x) => TripItemsModel.fromJson(x)).where(
+              (tripItems) =>
+                  tripItems.id != null &&
+                  tripItems.name != null &&
+                  tripItems.photoUrl != null &&
+                  tripItems.description != null &&
+                  tripItems.location != null &&
+                  tripItems.price != null &&
+                  tripItems.rating != null),
         ),
       );
 
@@ -21,16 +24,9 @@ class TripModel extends Equatable {
           ),
         ),
       };
-
-  Trip toEntity() {
-    return Trip(trip: const []);
-  }
-
-  @override
-  List<Object?> get props => [trip];
 }
 
-class TripItemsModel extends Equatable {
+class TripItemsModel {
   int id;
   String name;
   String? photoUrl;
@@ -68,15 +64,4 @@ class TripItemsModel extends Equatable {
         "price": price,
         "rating": rating,
       };
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        photoUrl,
-        description,
-        location,
-        price,
-        rating,
-      ];
 }

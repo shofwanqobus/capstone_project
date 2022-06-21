@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class DetailTripModel extends Equatable {
+class DetailTripModel {
   TripItems trip;
 
   DetailTripModel({required this.trip});
@@ -13,12 +11,9 @@ class DetailTripModel extends Equatable {
   Map<String, dynamic> toJson() => {
         "hotels": trip.toJson(),
       };
-
-  @override
-  List<Object?> get props => [trip];
 }
 
-class TripItems extends Equatable {
+class TripItems {
   int id;
   String name;
   String? photoUrl;
@@ -26,7 +21,6 @@ class TripItems extends Equatable {
   String location;
   int price;
   double rating;
-  List<Accomodations> accomodations;
 
   TripItems({
     required this.id,
@@ -36,7 +30,6 @@ class TripItems extends Equatable {
     required this.location,
     required this.price,
     required this.rating,
-    required this.accomodations,
   });
 
   factory TripItems.fromJson(Map<String, dynamic> json) => TripItems(
@@ -47,11 +40,6 @@ class TripItems extends Equatable {
         location: json["location"],
         price: json["price"].toInt() as int,
         rating: json["rating"].toDouble() as double,
-        accomodations: List<Accomodations>.from(
-          json["accomodations"].map(
-            (x) => Accomodations.fromJson(x),
-          ),
-        ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,39 +50,5 @@ class TripItems extends Equatable {
         "location": location,
         "price": price,
         "rating": rating,
-        "accomodations": List<dynamic>.from(
-          accomodations.map(
-            (x) => x.toJson(),
-          ),
-        ),
       };
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        photoUrl,
-        description,
-        location,
-        price,
-        rating,
-        accomodations,
-      ];
-}
-
-class Accomodations extends Equatable {
-  String accomodations;
-
-  Accomodations({required this.accomodations});
-
-  factory Accomodations.fromJson(Map<String, dynamic> json) => Accomodations(
-        accomodations: json["accomodations"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "accomodations": accomodations,
-      };
-
-  @override
-  List<Object?> get props => [accomodations];
 }

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:mainpage/data/models/hotel_model.dart';
+import 'package:mainpage/data/models/plane_ticket_model.dart';
+import 'package:mainpage/data/models/trip_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -40,17 +42,23 @@ class DatabaseHelper {
         id TEXT PRIMARY KEY,
         name TEXT,
         photoUrl TEXT,
-        price INTEGER
+        description TEXT,
+        address TEXT,
+        price INTEGER,
+        rating DOUBLE
       );
     ''');
 
     await db.execute(
         '''
       CREATE TABLE  $_tblTrip (
-        id TEXT PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         name TEXT,
         photoUrl TEXT,
-        price INTEGER
+        description TEXT,
+        location TEXT,
+        price INTEGER,
+        rating DOUBLE
       );
     ''');
 
@@ -60,6 +68,8 @@ class DatabaseHelper {
         id TEXT PRIMARY KEY,
         name TEXT,
         photoUrl TEXT,
+        routes TEXT,
+        location TEXT,
         price INTEGER
       );
     ''');
@@ -70,17 +80,23 @@ class DatabaseHelper {
         id TEXT PRIMARY KEY,
         name TEXT,
         photoUrl TEXT,
-        price INTEGER
+        description TEXT,
+        address TEXT,
+        price INTEGER,
+        rating DOUBLE
       );
     ''');
 
     await db.execute(
         '''
       CREATE TABLE  $_favTrips (
-        id TEXT PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         name TEXT,
         photoUrl TEXT,
-        price INTEGER
+        description TEXT,
+        location TEXT,
+        price INTEGER,
+        rating DOUBLE
       );
     ''');
   }
@@ -88,6 +104,13 @@ class DatabaseHelper {
   Future<void> bookedHotel(HotelItemsModel hotel) async {
     final db = await database;
     await db!.insert(_tblHotel, hotel.toJson());
+  }
+
+  Future<List<HotelItemsModel>> getBookedHotel() async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db!.query(_tblHotel);
+
+    return result.map((data) => HotelItemsModel.fromJson(data)).toList();
   }
 
   Future<Map<String, dynamic>?> getHotelById(String id) async {
@@ -105,29 +128,22 @@ class DatabaseHelper {
     }
   }
 
-  Future<List<HotelItemsModel>> getBookedHotel() async {
+  Future<void> bookedTrip(TripItemsModel trip) async {
     final db = await database;
-    List<Map<String, dynamic>> result = await db!.query(_tblHotel);
-
-    return result.map((data) => HotelItemsModel.fromJson(data)).toList();
+    await db!.insert(_tblTrip, trip.toJson());
   }
 
-  Future<void> addHotel(HotelItemsModel hotel) async {
+  Future<List<TripItemsModel>> getBookedTrip() async {
     final db = await database;
-    await db!.insert(_favHotels, hotel.toJson());
+    List<Map<String, dynamic>> result = await db!.query(_tblTrip);
+
+    return result.map((data) => TripItemsModel.fromJson(data)).toList();
   }
 
-  Future<List<HotelItemsModel>> getFavoritedHotel() async {
-    final db = await database;
-    List<Map<String, dynamic>> result = await db!.query(_favHotels);
-
-    return result.map((data) => HotelItemsModel.fromJson(data)).toList();
-  }
-
-  Future<Map<String, dynamic>?> getFavHotelById(String id) async {
+  Future<Map<String, dynamic>?> getTripById(int id) async {
     final db = await database;
     final results = await db!.query(
-      _tblHotel,
+      _tblTrip,
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -139,8 +155,30 @@ class DatabaseHelper {
     }
   }
 
-  Future<void> removeHotel(String id) async {
+  Future<void> bookedTicket(PlaneTicketItems ticket) async {
     final db = await database;
-    await db!.delete(_favHotels, where: 'id = ?', whereArgs: [id]);
+    await db!.insert(_tblTicket, ticket.toJson());
+  }
+
+  Future<List<PlaneTicketItems>> getBookedTicket() async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db!.query(_tblHotel);
+
+    return result.map((data) => PlaneTicketItems.fromJson(data)).toList();
+  }
+
+  Future<Map<String, dynamic>?> getTicketById(String id) async {
+    final db = await database;
+    final results = await db!.query(
+      _tblTicket,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (results.isNotEmpty) {
+      return results.first;
+    } else {
+      return null;
+    }
   }
 }

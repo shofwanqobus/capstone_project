@@ -7,37 +7,7 @@
             "description": "There is never a shortage of tourism destinations on the outskirts of Bandung. If you have a day to spend, why don’t you take a refreshing, back-to-nature trip to Mount Tangkuban Perahu?  Start your day with back-to-nature trip to Tangkuban Perahu , one of West Java's active volcanoes.\n\nTangkuban Perahu has definitely a significant role especially in the development of the surrounding Parahyangan (land of God) Highlands. Its eruption contributed immensely to the formation and fertility of the hills north of Bandung when through its flow of lava carrying large boulders into the valleys, these formed huge cliffs over which waterfalls leapt to form the lake that today covers the Bandung plain.\n\nLocated at the highland just at the outskirt of Bandung, Tangkuban Perahu Crater is surely a perfect place to enjoy cool air and relaxing sceneries after a series of shopping activities. For a rejuvenating sensation, visitors can continue their journey to the nearby Ciater's Revitalizing Hot Springs",
             "location": "West Bandung Regency, West Java",
             "price": 75000,
-            "rating": 4.5,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "rating": 4.5
         },
         {
             "id": 2,
@@ -46,37 +16,7 @@
             "description": "The beauty of Borobudur and all its glory is not only intriguing for its visitors in the daytime, but there is also a growing interest to relish the temple’s grandiose at sunrise. While the temple entrance officially opens at 6 am, sunrise hunters could be in the vicinity of the temple around 5 am to catch the stunning temple from the pitch black of dawn to the break of morning light. As the lights slowly uncover each part of the temple from the platform, the statues, stupas, and the carvings, it all turns into a breathtaking view.\n\nNo visit to Yogyakarta is complete without seeing Borobudur Temple. Join an exclusive guided tour of this majestic 8th-century Buddhist temple, one of Indonesia’s greatest religious monuments and start your day trip in Yogyakarta by witnessing wonderful sunrise at Borobudur Temple.",
             "location": "Magelang, Central Java",
             "price": 50000,
-            "rating": 4.7,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ]
-            }
+            "rating": 4.7
         },
         {
             "id": 3,
@@ -85,37 +25,7 @@
             "description": "Experience all 3 Gili islands on the same day with a snorkeling trip from Lombok. Begin by taking a boat to Gili Trawangan, and enjoy the view of beaches and hills along the way. This half-day snorkeling trip will visit some famous snorkeling spots on Gili islands, a great activity for travelers who stay at Gili Trawangan.\n\nSnorkeling is an excellent way to relax and see the amazing diversity of marine life. Almost anyone can snorkel, you do not need to be a great swimmer just comfortable getting into the water and ready for a great adventure. If you need a little help with buoyancy then we have life jackets available. Kids love snorkeling so make this one of the highlights of your family holiday here in Beautiful Gili Islands in North Lombok.",
             "location": "North Lombok Regency, West Nusa Gili Indah, Pemenang, North Lombok Regency, West Nusa Tenggara",
             "price": 20000,
-            "rating": 4.6,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ]
-            }
+            "rating": 4.6
         },
         {
             "id": 4,
@@ -124,37 +34,7 @@
             "description": "The Monas, short for Monumen Nasional is one of the top tourist attractions in Jakarta. Visiting the Monas should be something to consider during your trip to Jakarta. If you visit the Monas you will gain additional perspective about Indonesia, particularly, from a cultural and historical point of view.\n\nGoing up to the top of the Monas is one of the main things to do in Jakarta. Domestic tourists, in particular, get excited about going up to the view of the city. This makes your timing very important when you are fitting the Monas into your travel itinerary for your visit. The observation deck of the Monas usually opens up at 8 am. However, If you don’t show up at the right time, you could be in line for a while.",
             "location": "Central Jakarta City, Jakarta",
             "price": 15000,
-            "rating": 4.6,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    }
-                ]
-            }
+            "rating": 4.6
         },
         {
             "id": 5,
@@ -163,38 +43,7 @@
             "description": "Just on the outskirts of the hill town of Bukittinggi in the Minangkabau highlands, lies this breathtaking canyon which the locals call Ngarai Sianok, or the Sianok Canyon. Its panorama is particularly beautiful in the early morning light when the first rays of the sun pierce through the mist covering this deep valley that has majestic Mount Singgalang looming at its background.\n\nEnjoy the beauty of Ngarai Sianok from Panorama Park while using the gazebos while watching monkeys playing around in the park. There is a 20 meter tall tower near souvenir shops where you could see the beauty of Ngarai Sianok clearer.\n\nThe beauty of Sianok can be seen from Panorama Park in Bukittinggi or you can also walk down into the gorge, where are a settlement and paddy fields. Then crossing a bridge over the river, climb up to Kota Gadang, home of silversmiths who produce the finest filigree ornaments.",
             "location": "Agam Regency, West Sumatra",
             "price": 15000,
-            "rating": 4.6,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Guide"
-                    },
-                    
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "rating": 4.6
         },
         {
             "id": 6,
@@ -203,37 +52,7 @@
             "description": "Visiting the  zoo is one of the popular things to do for families to spend time. The Zoo is  where you and your family can see and learn about different kinds of animals. Some zoos, like Taman Safari, even provide natural-like environments, in which you can witness the animals interacting with one another just a couple meters  away from your vehicle, which would  certainly bring some excitement, especially for your children.",
             "location": "Bogor Regency, West Java",
             "rating": 4.6,
-            "price": 350000,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "price": 350000
         },
         {
             "id": 7,
@@ -242,38 +61,7 @@
             "description": "One of the recommended museums to visit here in Bandung is the Geology Museum Bandung. With the amount of more than 350.000 collections, the museum may provide enormous information. The collections consist of three categories: rocks, minerals, and the main attraction, fossils.\n\nThe history of this Geology Museum was started in 1850 during Dutch colonization. That year the Dutch government in Indonesia established Dienst van het Mijnwezen, an organization to survey and do some researches on the geological materials in Indonesia. They need the minerals to support the industrial revolution in Europe.\n\nBack to present day, the name of Rembrandt straat was replaced with Diponegoro street and the Art Deco building of Geologisch Laboratory has become the Geology Museum. This museum was renovated to its current look during 1999-2000, funded by JICA (Japan International Corporation Agency).",
             "location": "Bandung City, West Java",
             "price": 3000,
-            "rating": 4.6,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Guide"
-                    },
-                    
-                    {
-                        "accomodations": "Meals"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "rating": 4.6
         },
         {
             "id": 8,
@@ -282,37 +70,7 @@
             "description": "Putri Kencana waterfall is one of the waterfalls in Bogor. This waterfall was broadcast on a private television station as an attractive natural tourist destination. This tourist attraction does offer natural beauty as well as a variety of challenging outdoor activities.\n\nWhen you are at Curug Putri you will find a beautiful waterfall, although not too high, the water in the natural pool is turquoise green and very clear. The surrounding nature looks very beautiful, this is shown by the still shady trees that line the waterfall area.",
             "location": "Bogor Regency, West Java",
             "price": 25000,
-            "rating": 4.3,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "rating": 4.3
         },
         {
             "id": 9,
@@ -321,37 +79,7 @@
             "description": "Mandeh is a popular tourist destination nowadays, and it’s easy to see why! This West Sumatran jewel is comprised of small but beautiful, pristine islands with soft beaches that will make you feel like you’re walking on clouds. You can start your journey at Sironjong Gadang, Sironjong Ketek, and Cubadak Island to enjoy the beauty of the warm, clear waters. Then, you’ll head to Setan Island, where you’ll visit a beautiful mangrove forest before ending the tour and heading back to Padang.\n\nCovering an area of 70 hectares of underwater beauty, the islands are fringed with 389 hectares of mangrove forests and white beaches. Its undulating landscape of luxuriant hills and the pristine bay area is studded with small islands, a perfect photogenic postcard panorama! Only one hour’s drive from the city of Padang, the beaches of Mandeh slope to calm blue seas luring all to just jump in and swim in its cool waters.",
             "location": "South Pesisir Regency, West Sumatra",
             "price": 0,
-            "rating": 4.7,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "rating": 4.7
         },
         {
             "id": 10,
@@ -360,37 +88,7 @@
             "description": "What makes Gunung Kidul Regency a worthy vacation destination? Well, one of the reasons is the presence of unique natural attractions like Jomblang Cave. This cave located on a highland and has become a good spot for exploration or adventure. The location is in Jetis Wetan Village and it belongs to Semanu Sub-District. The fact is that tourists would find other caves in that area! However, Jomblang is the best when it comes to popularity. Aside from the seclusion, the cave has other charms especially related to history. Not to mention visitors are allowed to conduct caving and exploration inside!\n\nThe Goa Jomblang day tour is an Indiana Jones style adventure (ok, maybe Lara Croft). You’ll be lowered 60 meters into a sinkhole. Explore a hidden forest. Trek for more than 50 meters through a dark tunnel using only a flashlight. At the end of the tunnel you’ll enter a cave the size of a cathedral. A beam of light coming from a hole in the roof cuts through the darkness. As soon as you step into the light you’ll level up or get a great photo. In the afternoon you can take a traditional cable car over the ocean in Timang Beach, go cave tubing or visit a waterfall.",
             "location": "Gunung Kidul Regency, Special Region of Yogyakarta",
             "price": 1000000,
-            "rating": 4.6,
-            "accomodations": {
-                "availableAccomodations": [
-                    {
-                        "accomodations": "Guide"
-                    },
-                    {
-                        "accomodations": "Meals"
-                    },
-                    {
-                        "accomodations": "Documentation"
-                    }
-                ],
-                "notAvailableAccomodations": [
-                    {
-                        "accomodations": "Insurances"
-                    },
-                    {
-                        "accomodations": "Additional Services"
-                    },
-                    {
-                        "accomodations": "Transport"
-                    },
-                    {
-                        "accomodations": "Accomodation"
-                    },
-                    {
-                        "accomodations": "Hotel"
-                    }
-                ]
-            }
+            "rating": 4.6
         }
     ]
 }

@@ -54,132 +54,132 @@ class PlaceCard extends StatelessWidget {
   }
 }
 
-class HotelPlaceCard extends StatelessWidget {
-  const HotelPlaceCard({Key? key}) : super(key: key);
+// class HotelPlaceCard extends StatelessWidget {
+//   const HotelPlaceCard({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<FavDatabaseProvider>(
-      builder: (context, provider, child) {
-        if (provider.state == ResultState.loading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (provider.state == ResultState.hasData) {
-          return ListView.builder(
-            itemCount: provider.favorited.length,
-            itemBuilder: (context, index) {
-              return _favHotel(
-                provider.favorited[index],
-              );
-            },
-          );
-        } else if (provider.state == ResultState.noData) {
-          return Center(child: Text(provider.message));
-        } else if (provider.state == ResultState.error) {
-          return Center(
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 250),
-                  child: Icon(Icons.wifi_off, size: 50),
-                ),
-                Text(
-                  provider.message,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          );
-        } else {
-          return const Center(
-            child: Text(''),
-          );
-        }
-      },
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<FavDatabaseProvider>(
+//       builder: (context, provider, child) {
+//         if (provider.state == ResultState.loading) {
+//           return const Center(child: CircularProgressIndicator());
+//         } else if (provider.state == ResultState.hasData) {
+//           return ListView.builder(
+//             itemCount: provider.favorited.length,
+//             itemBuilder: (context, index) {
+//               return _favHotel(
+//                 provider.favorited[index],
+//               );
+//             },
+//           );
+//         } else if (provider.state == ResultState.noData) {
+//           return Center(child: Text(provider.message));
+//         } else if (provider.state == ResultState.error) {
+//           return Center(
+//             child: Column(
+//               children: [
+//                 const Padding(
+//                   padding: EdgeInsets.only(top: 250),
+//                   child: Icon(Icons.wifi_off, size: 50),
+//                 ),
+//                 Text(
+//                   provider.message,
+//                   textAlign: TextAlign.center,
+//                 ),
+//               ],
+//             ),
+//           );
+//         } else {
+//           return const Center(
+//             child: Text(''),
+//           );
+//         }
+//       },
+//     );
+//   }
 
-  Widget _favHotel(HotelItemsModel hotel) {
-    return Consumer<FavDatabaseProvider>(builder: (context, provider, child) {
-      return FutureBuilder<bool>(
-        future: provider.isFavorited(hotel.id),
-        builder: (context, state) {
-          return Align(
-            alignment: Alignment.centerLeft,
-            child: SizedBox(
-              child: InkWell(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return DetailPage(hotel: hotel);
-                  }),
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      child: CachedNetworkImage(
-                        imageUrl: hotel.photoUrl!,
-                        height: 125,
-                        width: 125,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.error,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(hotel.name, style: kBodyText),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.amber[400],
-                                    ),
-                                    Text('${hotel.rating}', style: kBodyText),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.price_change,
-                                      color: Colors.amber[400],
-                                    ),
-                                    Text('Rp. ${hotel.price}',
-                                        style: kBodyText),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    });
-  }
-}
+//   Widget _favHotel(HotelItemsModel hotel) {
+//     return Consumer<FavDatabaseProvider>(builder: (context, provider, child) {
+//       return FutureBuilder<bool>(
+//         future: provider.isFavorited(hotel.id),
+//         builder: (context, state) {
+//           return Align(
+//             alignment: Alignment.centerLeft,
+//             child: SizedBox(
+//               child: InkWell(
+//                 onTap: () => Navigator.push(
+//                   context,
+//                   MaterialPageRoute(builder: (context) {
+//                     return DetailPage(hotel: hotel);
+//                   }),
+//                 ),
+//                 child: Row(
+//                   children: [
+//                     ClipRRect(
+//                       borderRadius: const BorderRadius.all(Radius.circular(15)),
+//                       child: CachedNetworkImage(
+//                         imageUrl: hotel.photoUrl!,
+//                         height: 125,
+//                         width: 125,
+//                         placeholder: (context, url) => const Center(
+//                           child: CircularProgressIndicator(),
+//                         ),
+//                         errorWidget: (context, url, error) => const Icon(
+//                           Icons.error,
+//                           color: Colors.red,
+//                         ),
+//                       ),
+//                     ),
+//                     Container(
+//                       margin: const EdgeInsets.symmetric(horizontal: 8),
+//                       alignment: Alignment.centerLeft,
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.start,
+//                         mainAxisSize: MainAxisSize.max,
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Text(hotel.name, style: kBodyText),
+//                           Container(
+//                             alignment: Alignment.centerLeft,
+//                             child: Column(
+//                               mainAxisSize: MainAxisSize.min,
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 Row(
+//                                   children: [
+//                                     Icon(
+//                                       Icons.star,
+//                                       color: Colors.amber[400],
+//                                     ),
+//                                     Text('${hotel.rating}', style: kBodyText),
+//                                   ],
+//                                 ),
+//                                 Row(
+//                                   children: [
+//                                     Icon(
+//                                       Icons.price_change,
+//                                       color: Colors.amber[400],
+//                                     ),
+//                                     Text('Rp. ${hotel.price}',
+//                                         style: kBodyText),
+//                                   ],
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       );
+//     });
+//   }
+// }
 
 class TicketCard extends StatelessWidget {
   const TicketCard({Key? key}) : super(key: key);

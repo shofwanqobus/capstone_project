@@ -2,14 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:mainpage/data/models/trip_model.dart';
+import 'package:mainpage/presentation/provider/trip_database_provider.dart';
+import 'package:provider/provider.dart';
 
 class TripDetailPage extends StatelessWidget {
   const TripDetailPage({Key? key, required this.trip}) : super(key: key);
 
   final TripItemsModel trip;
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _details(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -144,16 +145,26 @@ class TripDetailPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () =>
-                                  Navigator.pushNamed(context, paymentScreen),
-                              child: Text('Book Now', style: textButton2),
-                              style: ElevatedButton.styleFrom(
-                                elevation: 2,
-                                shadowColor: Colors.black,
-                                primary: backgroundPrimary1,
-                                minimumSize: const Size(60, 60),
-                              ),
+                            Consumer<TripDatabaseProvider>(
+                              builder: (context, provider, child) {
+                                return FutureBuilder<bool>(
+                                  future: provider.isBooked(trip.id),
+                                  builder: (context, snapshot) {
+                                    return ElevatedButton(
+                                      onPressed: () =>
+                                          provider.bookedTrip(trip),
+                                      child:
+                                          Text('Book Now', style: textButton2),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        shadowColor: Colors.black,
+                                        primary: backgroundPrimary1,
+                                        minimumSize: const Size(60, 60),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -167,6 +178,25 @@ class TripDetailPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<TripDatabaseProvider>(
+          create: (_) => TripDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+        // ChangeNotifierProvider<FavDatabaseProvider>(
+        //   create: (_) => FavDatabaseProvider(
+        //     databaseHelper: DatabaseHelper(),
+        //   ),
+        // ),
+      ],
+      child: Scaffold(body: _details(context)),
     );
   }
 }

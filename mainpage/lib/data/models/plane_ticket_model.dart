@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class PlaneTicketModel extends Equatable {
+class PlaneTicketModel {
   List<PlaneTicketItems> tickets;
 
   PlaneTicketModel({required this.tickets});
@@ -8,9 +6,15 @@ class PlaneTicketModel extends Equatable {
   factory PlaneTicketModel.fromJson(Map<String, dynamic> json) =>
       PlaneTicketModel(
         tickets: List<PlaneTicketItems>.from(
-          json["tickets"].map(
-            (x) => PlaneTicketItems.fromJson(x),
-          ),
+          (json["tickets"] as List)
+              .map((x) => PlaneTicketItems.fromJson(x))
+              .where((ticketItems) =>
+                  ticketItems.id != null &&
+                  ticketItems.name != null &&
+                  ticketItems.photoUrl != null &&
+                  ticketItems.routes != null &&
+                  ticketItems.location != null &&
+                  ticketItems.price != null),
         ),
       );
 
@@ -21,12 +25,9 @@ class PlaneTicketModel extends Equatable {
           ),
         ),
       };
-
-  @override
-  List<Object?> get props => [tickets];
 }
 
-class PlaneTicketItems extends Equatable {
+class PlaneTicketItems {
   String id;
   String name;
   String? photoUrl;
@@ -61,14 +62,4 @@ class PlaneTicketItems extends Equatable {
         "location": location,
         "price": price,
       };
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        photoUrl,
-        routes,
-        location,
-        price,
-      ];
 }

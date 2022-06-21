@@ -1,16 +1,20 @@
-import 'package:equatable/equatable.dart';
-import 'package:mainpage/domain/entities/hotel.dart';
-
-class HotelModel extends Equatable {
+class HotelModel {
   List<HotelItemsModel> hotelItemsModel;
 
   HotelModel({required this.hotelItemsModel});
 
   factory HotelModel.fromJson(Map<String, dynamic> hotel) => HotelModel(
         hotelItemsModel: List<HotelItemsModel>.from(
-          hotel["hotels"].map(
-            (x) => HotelItemsModel.fromJson(x),
-          ),
+          (hotel["hotels"] as List)
+              .map((x) => HotelItemsModel.fromJson(x))
+              .where((hotelItems) =>
+                  hotelItems.id != null &&
+                  hotelItems.name != null &&
+                  hotelItems.photoUrl != null &&
+                  hotelItems.description != null &&
+                  hotelItems.address != null &&
+                  hotelItems.price != null &&
+                  hotelItems.address != null),
         ),
       );
 
@@ -21,16 +25,9 @@ class HotelModel extends Equatable {
           ),
         ),
       };
-
-  Hotel toEntity() {
-    return Hotel(hotelItems: const []);
-  }
-
-  @override
-  List<Object?> get props => [hotelItemsModel];
 }
 
-class HotelItemsModel extends Equatable {
+class HotelItemsModel {
   String id;
   String name;
   String? photoUrl;
@@ -69,15 +66,4 @@ class HotelItemsModel extends Equatable {
         "price": price,
         "rating": rating,
       };
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        photoUrl,
-        description,
-        address,
-        price,
-        rating,
-      ];
 }

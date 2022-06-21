@@ -3,12 +3,13 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:mainpage/data/models/plane_ticket_model.dart';
 import 'package:mainpage/presentation/pages/home_page.dart';
+import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
+import 'package:provider/provider.dart';
 
 class Plane extends StatelessWidget {
   const Plane({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _ticket(BuildContext context) {
     return Scaffold(
       appBar: homeAppBar(),
       backgroundColor: backgroundPrimary2,
@@ -46,6 +47,16 @@ class Plane extends StatelessWidget {
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<TicketDatabaseProvider>(
+      create: (_) => TicketDatabaseProvider(
+        databaseHelper: DatabaseHelper(),
+      ),
+      child: Scaffold(body: _ticket(context)),
+    );
+  }
+
   Widget _listTickets(BuildContext context, PlaneTicketItems tickets) {
     return Column(
       children: [
@@ -74,18 +85,24 @@ class Plane extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () => Navigator.pushNamed(context, paymentScreen),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: backgroundPrimary1,
-                      ),
-                      child: Text('Buy', style: textButton2),
-                    ),
+                  Consumer<TicketDatabaseProvider>(
+                    builder: (context, provider, child) {
+                      return FutureBuilder<bool>(
+                        future: provider.isBooked(tickets.id),
+                        builder: (context, snapshot) {
+                          return ElevatedButton(
+                            onPressed: () => provider.bookedTicket(tickets),
+                            child: Text('Buy', style: textButton2),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 2,
+                              shadowColor: Colors.black,
+                              primary: backgroundPrimary1,
+                              minimumSize: const Size(40, 100),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(height: 10),
                   Text('Rp. ${tickets.price!}',

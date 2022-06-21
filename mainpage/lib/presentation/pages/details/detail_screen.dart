@@ -20,11 +20,11 @@ class DetailPage extends StatelessWidget {
             databaseHelper: DatabaseHelper(),
           ),
         ),
-        ChangeNotifierProvider<FavDatabaseProvider>(
-          create: (_) => FavDatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
+        // ChangeNotifierProvider<FavDatabaseProvider>(
+        //   create: (_) => FavDatabaseProvider(
+        //     databaseHelper: DatabaseHelper(),
+        //   ),
+        // ),
       ],
       child: Scaffold(body: _details(context)),
     );
@@ -61,32 +61,32 @@ class DetailPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  Consumer<FavDatabaseProvider>(
-                    builder: (context, provider, child) {
-                      return FutureBuilder<bool>(
-                        future: provider.isFavorited(hotel.id),
-                        builder: ((context, snapshot) {
-                          var isFavorited = snapshot.data ?? false;
-                          return CircleAvatar(
-                            backgroundColor: Colors.white54,
-                            child: isFavorited
-                                ? IconButton(
-                                    icon: const Icon(Icons.favorite),
-                                    color: Colors.red,
-                                    onPressed: () =>
-                                        provider.removeFavoriteHotel(hotel.id),
-                                  )
-                                : IconButton(
-                                    icon: const Icon(Icons.favorite_border),
-                                    color: Colors.red,
-                                    onPressed: () =>
-                                        provider.addFavoritedHotel(hotel),
-                                  ),
-                          );
-                        }),
-                      );
-                    },
-                  ),
+                  // Consumer<FavDatabaseProvider>(
+                  //   builder: (context, provider, child) {
+                  //     return FutureBuilder<bool>(
+                  //       future: provider.isFavorited(hotel.id),
+                  //       builder: ((context, snapshot) {
+                  //         var isFavorited = snapshot.data ?? false;
+                  //         return CircleAvatar(
+                  //           backgroundColor: Colors.white54,
+                  //           child: isFavorited
+                  //               ? IconButton(
+                  //                   icon: const Icon(Icons.favorite),
+                  //                   color: Colors.red,
+                  //                   onPressed: () =>
+                  //                       provider.removeFavoriteHotel(hotel.id),
+                  //                 )
+                  //               : IconButton(
+                  //                   icon: const Icon(Icons.favorite_border),
+                  //                   color: Colors.red,
+                  //                   onPressed: () =>
+                  //                       provider.addFavoritedHotel(hotel),
+                  //                 ),
+                  //         );
+                  //       }),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),
@@ -184,21 +184,22 @@ class DetailPage extends StatelessWidget {
                             Consumer<DatabaseProvider>(
                               builder: (context, provider, child) {
                                 return FutureBuilder<bool>(
-                                    future: provider.isBooked(hotel.id),
-                                    builder: (context, snapshot) {
-                                      return ElevatedButton(
-                                        onPressed: () =>
-                                            provider.bookedHotel(hotel),
-                                        child: Text('Book Now',
-                                            style: textButton2),
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 2,
-                                          shadowColor: Colors.black,
-                                          primary: backgroundPrimary1,
-                                          minimumSize: const Size(60, 60),
-                                        ),
-                                      );
-                                    });
+                                  future: provider.isBooked(hotel.id),
+                                  builder: (context, snapshot) {
+                                    return ElevatedButton(
+                                      onPressed: () =>
+                                          provider.bookedHotel(hotel),
+                                      child:
+                                          Text('Book Now', style: textButton2),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 2,
+                                        shadowColor: Colors.black,
+                                        primary: backgroundPrimary1,
+                                        minimumSize: const Size(60, 60),
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                             ),
                           ],
