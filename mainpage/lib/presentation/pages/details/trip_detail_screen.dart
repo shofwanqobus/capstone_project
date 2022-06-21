@@ -122,14 +122,6 @@ class TripDetailPage extends StatelessWidget {
                           textAlign: TextAlign.justify,
                         ),
                         const SizedBox(height: 20),
-                        Text(
-                          'Accommodations',
-                          style: kHeading6,
-                          textAlign: TextAlign.justify,
-                        ),
-                        const SizedBox(height: 10),
-                        // ListView(),
-                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
