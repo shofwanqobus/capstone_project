@@ -6,6 +6,11 @@ import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:mainpage/presentation/pages/details/trip_detail_screen.dart';
+import 'package:mainpage/presentation/provider/database_provider.dart';
+import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
+import 'package:mainpage/presentation/provider/trip_database_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,14 +21,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   int _currentIndex = 0;
-
-  final List _screens = const [
-    HomeScreen(),
-    BookedPage(),
-    SearchPage(),
-    UserPage(),
-    SettingsPage(),
-  ];
 
   final List _appBar = [
     homeAppBar(),
@@ -39,12 +36,68 @@ class _HomePage extends State<HomePage> {
     });
   }
 
+  final List<Widget> _listWidget = [
+    const HomeScreen(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DatabaseProvider>(
+          create: (_) => DatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+        ChangeNotifierProvider<TicketDatabaseProvider>(
+          create: (_) => TicketDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+        ChangeNotifierProvider<TripDatabaseProvider>(
+          create: (_) => TripDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
+      ],
+      child: const BookedPage(),
+    ),
+    const SearchPage(),
+    const UserPage(),
+    const SettingsPage(),
+  ];
+
+  final List<BottomNavigationBarItem> _bottomNavBarItems = [
+    const BottomNavigationBarItem(
+      backgroundColor: backgroundPrimary2,
+      icon: Icon(Icons.home, color: backgroundPrimary2, size: 50),
+      label: 'Home',
+    ),
+    const BottomNavigationBarItem(
+      backgroundColor: backgroundPrimary2,
+      icon: Icon(Icons.bookmark_rounded, color: backgroundPrimary2, size: 50),
+      label: 'Booked',
+    ),
+    const BottomNavigationBarItem(
+      backgroundColor: backgroundPrimary2,
+      icon: Icon(Icons.search, color: backgroundPrimary2, size: 50),
+      label: 'Search',
+    ),
+    const BottomNavigationBarItem(
+      backgroundColor: backgroundPrimary2,
+      icon: Icon(Icons.supervisor_account_rounded,
+          color: backgroundPrimary2, size: 50),
+      label: 'User',
+    ),
+    const BottomNavigationBarItem(
+      backgroundColor: backgroundPrimary2,
+      icon: Icon(Icons.settings, color: backgroundPrimary2, size: 50),
+      label: 'Settings',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPrimary2,
       appBar: _appBar[_currentIndex],
-      body: _screens[_currentIndex],
+      body: _listWidget[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: backgroundPrimary1,
@@ -52,35 +105,7 @@ class _HomePage extends State<HomePage> {
         selectedLabelStyle: textButton2,
         currentIndex: _currentIndex,
         onTap: _updateIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            backgroundColor: backgroundPrimary2,
-            icon: Icon(Icons.home, color: backgroundPrimary2, size: 50),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: backgroundPrimary2,
-            icon: Icon(Icons.bookmark_rounded,
-                color: backgroundPrimary2, size: 50),
-            label: 'Booked',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: backgroundPrimary2,
-            icon: Icon(Icons.search, color: backgroundPrimary2, size: 50),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: backgroundPrimary2,
-            icon: Icon(Icons.supervisor_account_rounded,
-                color: backgroundPrimary2, size: 50),
-            label: 'User',
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: backgroundPrimary2,
-            icon: Icon(Icons.settings, color: backgroundPrimary2, size: 50),
-            label: 'Settings',
-          ),
-        ],
+        items: _bottomNavBarItems,
       ),
     );
   }
