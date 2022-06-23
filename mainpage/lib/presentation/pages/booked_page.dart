@@ -17,109 +17,38 @@ class BookedPage extends StatefulWidget {
 }
 
 class _BookedPageState extends State<BookedPage> {
-  int _currentTabIndex = 0;
-
-  final List _body = [
-    const PlaceTab(),
-    const TicketTab(),
-    const TripTab(),
-  ];
-
-  void _updateIndex(int index) {
-    setState(() {
-      _currentTabIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: () => _updateIndex(0),
-                child: TopText(
-                  text: 'Place',
-                  primary: _currentTabIndex == 0 ? true : false,
-                ),
-              ),
-              InkWell(
-                onTap: () => _updateIndex(1),
-                child: TopText(
-                  text: 'Tickets',
-                  primary: _currentTabIndex == 1 ? true : false,
-                ),
-              ),
-              InkWell(
-                onTap: () => _updateIndex(2),
-                child: TopText(
-                  text: 'Trip',
-                  primary: _currentTabIndex == 2 ? true : false,
-                ),
-              ),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: backgroundPrimary1,
+          leading: const Icon(
+            Icons.bookmark_rounded,
+            size: 36,
+            color: backgroundPrimary2,
+          ),
+          title: Text('Booked', style: button),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'Place'),
+              Tab(text: 'Tickets'),
+              Tab(text: 'Trip'),
             ],
           ),
         ),
-        const Divider(
-          color: Colors.grey,
-          height: 5,
-          thickness: 2,
-        ),
-        _body[_currentTabIndex],
-      ],
-    );
-  }
-}
-
-class TopText extends StatelessWidget {
-  const TopText({Key? key, required this.text, required this.primary})
-      : super(key: key);
-
-  final String text;
-  final bool primary;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: Theme.of(context).textTheme.titleSmall!.fontSize,
-          color: primary
-              ? const Color.fromARGB(255, 84, 99, 85)
-              : backgroundPrimary1,
-          fontWeight: primary ? FontWeight.bold : FontWeight.w400,
+        body: const TabBarView(
+          children: [
+            PlaceTab(),
+            TicketTab(),
+            TripTab(),
+          ],
         ),
       ),
     );
   }
 }
-
-// class BookedButton extends StatelessWidget {
-//   const BookedButton({Key? key, required this.status}) : super(key: key);
-
-//   final bool status;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return OutlinedButton(
-//       onPressed: () {},
-//       child: Text(status ? "Booked" : "Cancelled"),
-//       style: OutlinedButton.styleFrom(
-//         primary: status ? Colors.green : Colors.redAccent,
-//         side: BorderSide(
-//           width: 1.0,
-//           color: status ? Colors.green : Colors.red,
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class PlaceTab extends StatelessWidget {
   const PlaceTab({Key? key}) : super(key: key);
@@ -130,7 +59,10 @@ class PlaceTab extends StatelessWidget {
       create: (_) => DatabaseProvider(
         databaseHelper: DatabaseHelper(),
       ),
-      child: Scaffold(body: _listBooked(context)),
+      child: Scaffold(
+        backgroundColor: backgroundPrimary2,
+        body: _listBooked(context),
+      ),
     );
   }
 
@@ -180,35 +112,27 @@ class PlaceTab extends StatelessWidget {
         future: provider.isBooked(hotel.id),
         builder: (context, snapshot) {
           return Material(
+            color: backgroundPrimary2,
             child: ListTile(
               leading: Hero(
                 tag: hotel.photoUrl!,
                 child: CachedNetworkImage(
                   imageUrl: hotel.photoUrl!,
+                  alignment: Alignment.center,
+                  height: 60,
                   width: 100,
                 ),
               ),
               title: Container(
-                padding: const EdgeInsets.only(),
+                padding: const EdgeInsets.only(top: 12),
                 child: Text(hotel.name),
               ),
-              subtitle: Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.price_change,
-                            size: 15,
-                          ),
-                          Text('${hotel.price}'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(hotel.address),
+                  Text('Rp. ${hotel.price}'),
+                ],
               ),
             ),
           );
@@ -243,7 +167,7 @@ class TicketTab extends StatelessWidget {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(top: 250),
-                  child: Icon(Icons.wifi_off, size: 50),
+                  child: Icon(Icons.error, size: 50),
                 ),
                 Text(
                   provider.message,
@@ -268,28 +192,29 @@ class TicketTab extends StatelessWidget {
           future: provider.isBooked(tickets.id),
           builder: (context, snapshot) {
             return Material(
+              color: backgroundPrimary2,
               child: ListTile(
-                contentPadding: const EdgeInsets.all(8),
-                title: Container(
-                  child: Text(tickets.name),
+                leading: const Icon(Icons.flight_takeoff_outlined,
+                    size: 48, color: black),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 28,
                 ),
-                subtitle: Container(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 4),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.price_change,
-                              size: 15,
-                            ),
-                            Text('${tickets.price}'),
-                          ],
-                        ),
+                title: Text(tickets.name, style: kHeading6),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 3),
+                    Text(
+                      tickets.routes + ' | ' + tickets.location,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text('Rp. ${tickets.price}'),
+                  ],
                 ),
               ),
             );
@@ -305,7 +230,10 @@ class TicketTab extends StatelessWidget {
       create: (_) => TicketDatabaseProvider(
         databaseHelper: DatabaseHelper(),
       ),
-      child: Scaffold(body: _listTickets(context)),
+      child: Scaffold(
+        backgroundColor: backgroundPrimary2,
+        body: _listTickets(context),
+      ),
     );
   }
 }
@@ -319,7 +247,10 @@ class TripTab extends StatelessWidget {
       create: (_) => TripDatabaseProvider(
         databaseHelper: DatabaseHelper(),
       ),
-      child: Scaffold(body: _listBooked(context)),
+      child: Scaffold(
+        backgroundColor: backgroundPrimary2,
+        body: _listBooked(context),
+      ),
     );
   }
 
@@ -364,45 +295,39 @@ class TripTab extends StatelessWidget {
   }
 
   Widget _bookedTrip(TripItemsModel trip) {
-    return Consumer<TripDatabaseProvider>(builder: (context, provider, child) {
-      return FutureBuilder<bool>(
-        future: provider.isBooked(trip.id),
-        builder: (context, snapshot) {
-          return Material(
-            child: ListTile(
-              leading: Hero(
-                tag: trip.photoUrl!,
-                child: CachedNetworkImage(
-                  imageUrl: trip.photoUrl!,
-                  width: 100,
-                ),
-              ),
-              title: Container(
-                padding: const EdgeInsets.only(),
-                child: Text(trip.name),
-              ),
-              subtitle: Container(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.price_change,
-                            size: 15,
-                          ),
-                          Text('${trip.price}'),
-                        ],
-                      ),
+    return Consumer<TripDatabaseProvider>(
+      builder: (context, provider, child) {
+        return FutureBuilder<bool>(
+          future: provider.isBooked(trip.id),
+          builder: (context, snapshot) {
+            return Material(
+              color: backgroundPrimary2,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: ListTile(
+                  leading: Hero(
+                    tag: trip.photoUrl!,
+                    child: CachedNetworkImage(
+                      imageUrl: trip.photoUrl!,
+                      alignment: Alignment.center,
+                      height: 60,
+                      width: 100,
                     ),
-                  ],
+                  ),
+                  title: Text(trip.name),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(trip.location),
+                      Text('Rp. ${trip.price}'),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      );
-    });
+            );
+          },
+        );
+      },
+    );
   }
 }

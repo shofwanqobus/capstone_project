@@ -1,4 +1,6 @@
-class PlaneTicketModel {
+import 'package:equatable/equatable.dart';
+
+class PlaneTicketModel extends Equatable {
   List<PlaneTicketItems> tickets;
 
   PlaneTicketModel({required this.tickets});
@@ -6,16 +8,7 @@ class PlaneTicketModel {
   factory PlaneTicketModel.fromJson(Map<String, dynamic> json) =>
       PlaneTicketModel(
         tickets: List<PlaneTicketItems>.from(
-          (json["tickets"] as List)
-              .map((x) => PlaneTicketItems.fromJson(x))
-              .where((ticketItems) =>
-                  ticketItems.id != null &&
-                  ticketItems.name != null &&
-                  ticketItems.photoUrl != null &&
-                  ticketItems.routes != null &&
-                  ticketItems.location != null &&
-                  ticketItems.price != null),
-        ),
+            json["tickets"].map((x) => PlaneTicketItems.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -25,9 +18,12 @@ class PlaneTicketModel {
           ),
         ),
       };
+
+  @override
+  List<Object> get props => [tickets];
 }
 
-class PlaneTicketItems {
+class PlaneTicketItems extends Equatable {
   String id;
   String name;
   String? photoUrl;
@@ -51,7 +47,7 @@ class PlaneTicketItems {
         photoUrl: json["url"],
         routes: json["routes"],
         location: json["location"],
-        price: json["price"],
+        price: json["price"] as int,
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,4 +58,14 @@ class PlaneTicketItems {
         "location": location,
         "price": price,
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        photoUrl,
+        routes,
+        location,
+        price,
+      ];
 }

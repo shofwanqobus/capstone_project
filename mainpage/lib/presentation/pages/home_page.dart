@@ -22,14 +22,6 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   int _currentIndex = 0;
 
-  final List _appBar = [
-    homeAppBar(),
-    homeAppBar(),
-    homeAppBar(),
-    userAppBar(),
-    settingsAppBar(),
-  ];
-
   void _updateIndex(int value) {
     setState(() {
       _currentIndex = value;
@@ -96,7 +88,6 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPrimary2,
-      appBar: _appBar[_currentIndex],
       body: _listWidget[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -115,21 +106,24 @@ AppBar homeAppBar() {
   return AppBar(
     backgroundColor: backgroundPrimary1,
     toolbarHeight: 75,
+    leading: const Icon(
+      Icons.home,
+      size: 36,
+      color: backgroundPrimary2,
+    ),
+    title: Text('Home Page', style: button),
     actions: [
-      Container(
-        padding: const EdgeInsets.only(right: 30),
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.mark_email_unread,
-              size: 40, color: backgroundPrimary2),
-        ),
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.mark_email_unread,
+            size: 36, color: backgroundPrimary2),
       ),
       Container(
-        padding: const EdgeInsets.only(right: 30),
+        padding: const EdgeInsets.only(right: 20),
         child: IconButton(
           onPressed: () {},
           icon: const Icon(Icons.notifications,
-              size: 40, color: backgroundPrimary2),
+              size: 36, color: backgroundPrimary2),
         ),
       ),
     ],
@@ -141,141 +135,146 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          const SizedBox(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: backgroundPrimary1,
-                  borderRadius: BorderRadius.circular(5),
+    return Scaffold(
+      appBar: homeAppBar(),
+      backgroundColor: backgroundPrimary2,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: backgroundPrimary1,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    icon: const Icon(Icons.hotel_rounded,
+                        size: 50, color: backgroundPrimary2),
+                    onPressed: () {},
+                  ),
                 ),
-                child: IconButton(
-                  alignment: Alignment.center,
-                  icon: const Icon(Icons.hotel_rounded,
-                      size: 50, color: backgroundPrimary2),
-                  onPressed: () {},
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: backgroundPrimary1,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    icon: const Icon(Icons.airplane_ticket_sharp,
+                        size: 50, color: backgroundPrimary2),
+                    onPressed: () => Navigator.pushNamed(context, planeTicket),
+                  ),
                 ),
-              ),
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: backgroundPrimary1,
-                  borderRadius: BorderRadius.circular(5),
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: backgroundPrimary1,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    icon: const Icon(Icons.location_city_rounded,
+                        size: 50, color: backgroundPrimary2),
+                    onPressed: () {},
+                  ),
                 ),
-                child: IconButton(
-                  alignment: Alignment.center,
-                  icon: const Icon(Icons.airplane_ticket_sharp,
-                      size: 50, color: backgroundPrimary2),
-                  onPressed: () => Navigator.pushNamed(context, planeTicket),
+                Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: backgroundPrimary1,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    icon: const Icon(Icons.menu,
+                        size: 50, color: backgroundPrimary2),
+                    onPressed: () {},
+                  ),
                 ),
-              ),
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: backgroundPrimary1,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: IconButton(
-                  alignment: Alignment.center,
-                  icon: const Icon(Icons.location_city_rounded,
-                      size: 50, color: backgroundPrimary2),
-                  onPressed: () {},
-                ),
-              ),
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: backgroundPrimary1,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: IconButton(
-                  alignment: Alignment.center,
-                  icon: const Icon(Icons.menu,
-                      size: 50, color: backgroundPrimary2),
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(
-              'Hotel',
-              style: kHeading6,
+              ],
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            height: 250,
-            child: FutureBuilder<String>(
-              future: DefaultAssetBundle.of(context)
-                  .loadString('assets/local_hotel.json'),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  Map<String, dynamic> jsonMap = jsonDecode(snapshot.data!);
-                  final hotels = HotelModel.fromJson(jsonMap);
+            const SizedBox(height: 30),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Text(
+                'Hotel',
+                style: kHeading6,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              height: 250,
+              child: FutureBuilder<String>(
+                future: DefaultAssetBundle.of(context)
+                    .loadString('assets/local_hotel.json'),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    Map<String, dynamic> jsonMap = jsonDecode(snapshot.data!);
+                    final hotels = HotelModel.fromJson(jsonMap);
 
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: hotels.hotelItemsModel.length,
-                    itemBuilder: (context, index) {
-                      return _hotelCard(context, hotels.hotelItemsModel[index]);
-                    },
-                  );
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: hotels.hotelItemsModel.length,
+                      itemBuilder: (context, index) {
+                        return _hotelCard(
+                            context, hotels.hotelItemsModel[index]);
+                      },
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 30),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(
-              'Trip',
-              style: kHeading6,
+            const SizedBox(height: 30),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Text(
+                'Trip',
+                style: kHeading6,
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            height: 250,
-            child: FutureBuilder<String>(
-              future: DefaultAssetBundle.of(context)
-                  .loadString('assets/local_trip.json'),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  Map<String, dynamic> jsonMap = jsonDecode(snapshot.data!);
-                  final trips = TripModel.fromJson(jsonMap);
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              height: 250,
+              child: FutureBuilder<String>(
+                future: DefaultAssetBundle.of(context)
+                    .loadString('assets/local_trip.json'),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    Map<String, dynamic> jsonMap = jsonDecode(snapshot.data!);
+                    final trips = TripModel.fromJson(jsonMap);
 
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: trips.trip.length,
-                    itemBuilder: (context, index) {
-                      return _tripCard(context, trips.trip[index]);
-                    },
-                  );
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: trips.trip.length,
+                      itemBuilder: (context, index) {
+                        return _tripCard(context, trips.trip[index]);
+                      },
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

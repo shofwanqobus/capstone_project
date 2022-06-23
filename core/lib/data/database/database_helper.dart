@@ -162,7 +162,7 @@ class DatabaseHelper {
 
   Future<List<PlaneTicketItems>> getBookedTicket() async {
     final db = await database;
-    List<Map<String, dynamic>> result = await db!.query(_tblHotel);
+    List<Map<String, dynamic>> result = await db!.query(_tblTicket);
 
     return result.map((data) => PlaneTicketItems.fromJson(data)).toList();
   }

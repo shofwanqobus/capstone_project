@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:core/core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+
+import 'home_page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -43,48 +46,62 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
+  AppBar searchAppBar() {
+    return AppBar(
+      backgroundColor: backgroundPrimary1,
+      toolbarHeight: 75,
+      automaticallyImplyLeading: false,
+      leading: const Icon(Icons.search, size: 36.0),
+      title: const Text("Search", style: TextStyle(fontSize: 24.0)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            controller: _controller,
-            onChanged: (value) {
-              setState(() {
-                textInput = value;
-              });
-            },
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Search",
+    return Scaffold(
+      appBar: searchAppBar(),
+      backgroundColor: backgroundPrimary2,
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: _controller,
+              onChanged: (value) {
+                setState(() {
+                  textInput = value;
+                });
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Search",
+              ),
             ),
-          ),
-          const SizedBox(height: 8.0),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                SearchTag(text: "Hotel"),
-                SearchTag(text: "Staycation"),
-                SearchTag(text: "Airplane"),
-                SearchTag(text: "Train"),
-                SearchTag(text: "Bus"),
-                SearchTag(text: "Trip"),
-              ],
+            const SizedBox(height: 8.0),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: const [
+                  SearchTag(text: "Hotel"),
+                  SearchTag(text: "Staycation"),
+                  SearchTag(text: "Airplane"),
+                  SearchTag(text: "Train"),
+                  SearchTag(text: "Bus"),
+                  SearchTag(text: "Trip"),
+                ],
+              ),
             ),
-          ),
-          Text(textInput),
-          Text(
-            "Last Search",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const LastSearchText(text: "Farmhouse Susu Lembang"),
-          const LastSearchText(text: "The Trans Luxury Hotel"),
-          const LastSearchText(text: "Floating Market"),
-        ],
+            Text(textInput),
+            Text(
+              "Last Search",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const LastSearchText(text: "Farmhouse Susu Lembang"),
+            const LastSearchText(text: "The Trans Luxury Hotel"),
+            const LastSearchText(text: "Floating Market"),
+          ],
+        ),
       ),
     );
   }

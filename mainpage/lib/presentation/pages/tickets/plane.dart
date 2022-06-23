@@ -2,16 +2,23 @@ import 'dart:convert';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:mainpage/data/models/plane_ticket_model.dart';
-import 'package:mainpage/presentation/pages/home_page.dart';
 import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:provider/provider.dart';
 
 class Plane extends StatelessWidget {
   const Plane({Key? key}) : super(key: key);
 
+  AppBar ticketsAppBar() {
+    return AppBar(
+      backgroundColor: backgroundPrimary1,
+      toolbarHeight: 75,
+      title: const Text("Plane Tickets", style: TextStyle(fontSize: 24.0)),
+    );
+  }
+
   Widget _ticket(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(),
+      appBar: ticketsAppBar(),
       backgroundColor: backgroundPrimary2,
       body: SingleChildScrollView(
         child: Column(
@@ -95,9 +102,12 @@ class Plane extends StatelessWidget {
                             child: Text('Buy', style: textButton2),
                             style: ElevatedButton.styleFrom(
                               elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
                               shadowColor: Colors.black,
                               primary: backgroundPrimary1,
-                              minimumSize: const Size(40, 100),
+                              minimumSize: const Size(80, 40),
                             ),
                           );
                         },
