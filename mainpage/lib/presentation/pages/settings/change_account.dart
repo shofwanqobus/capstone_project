@@ -9,7 +9,7 @@ class SettingsChangeAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPrimary2,
-      appBar: homeAppBar(),
+      appBar: settingsAppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(

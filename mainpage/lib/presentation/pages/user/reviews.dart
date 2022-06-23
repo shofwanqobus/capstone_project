@@ -1,14 +1,22 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:mainpage/presentation/pages/home_page.dart';
 
 class UserReviews extends StatelessWidget {
   const UserReviews({Key? key}) : super(key: key);
 
+  AppBar reviews() {
+    return AppBar(
+      backgroundColor: backgroundPrimary1,
+      toolbarHeight: 75,
+      title: Text('Reviews', style: button),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(),
+      appBar: reviews(),
+      backgroundColor: backgroundPrimary2,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: SingleChildScrollView(

@@ -26,7 +26,7 @@ class _SettingsPasswordConfirmationState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPrimary2,
-      appBar: homeAppBar(),
+      appBar: settingsAppBar(),
       body: Column(
         children: [
           const SizedBox(height: 12.0),

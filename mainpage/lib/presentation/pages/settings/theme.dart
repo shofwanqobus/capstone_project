@@ -23,7 +23,7 @@ class _LanguageState extends State<SettingsTheme> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(),
+      appBar: settingsAppBar(),
       body: Column(
         children: [
           const SizedBox(height: 12.0),

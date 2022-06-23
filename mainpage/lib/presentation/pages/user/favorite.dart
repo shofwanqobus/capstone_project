@@ -1,28 +1,34 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:mainpage/mainpage.dart';
-
-import 'utils/components.dart';
+// import 'utils/components.dart';
 
 class UserFavorite extends StatelessWidget {
   const UserFavorite({Key? key}) : super(key: key);
 
+  AppBar favoriteAppBar() {
+    return AppBar(
+      backgroundColor: backgroundPrimary1,
+      toolbarHeight: 75,
+      title: Text('Favorite Place/Trip', style: button),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: homeAppBar(),
+      appBar: favoriteAppBar(),
+      backgroundColor: backgroundPrimary2,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 12.0),
-            Center(
-              child: Text("Favorites", style: kHeading6),
-            ),
-            Text(
-              "Place/Trip (3)",
-              style: Theme.of(context).textTheme.titleSmall,
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                "Place",
+                style: textButton,
+              ),
             ),
             const SizedBox(height: 8.0),
             SingleChildScrollView(
@@ -34,9 +40,12 @@ class UserFavorite extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14.0),
-            Text(
-              "Tickets (0)",
-              style: Theme.of(context).textTheme.titleSmall,
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                "Trip",
+                style: textButton,
+              ),
             ),
           ],
         ),
