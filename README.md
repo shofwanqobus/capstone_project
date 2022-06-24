@@ -5,7 +5,9 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 
 ## Implemented Features
 - Authentication
-- Favorite a Place/Trip/Hotel/...
+- Favorite a Trip/Hotel
+- Booked a Hotel/Trip/Plane Tickets
+- Detail from Hotel/Trip
 - ...
 
 # Resources
