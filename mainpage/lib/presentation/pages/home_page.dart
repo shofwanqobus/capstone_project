@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
@@ -11,6 +12,7 @@ import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,12 +22,64 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  final _auth = FirebaseAuth.instance;
+
   int _currentIndex = 0;
 
   void _updateIndex(int value) {
     setState(() {
       _currentIndex = value;
     });
+  }
+
+  Future<void> _confirmSignOut() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(child: Text("Confirmation")),
+          content: SingleChildScrollView(
+            child: Column(
+              children: const [
+                Text("Sign out?"),
+              ],
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red[400],
+              ),
+              child: const Text("Confirm"),
+              onPressed: () async {
+                try {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.remove("data");
+
+                  await _auth.signOut();
+
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                } catch (e) {
+                  print(e);
+                }
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: backgroundPrimary1,
+              ),
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   final List<Widget> _listWidget = [
@@ -86,17 +140,25 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundPrimary2,
-      body: _listWidget[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: backgroundPrimary1,
-        unselectedLabelStyle: textButton2,
-        selectedLabelStyle: textButton2,
-        currentIndex: _currentIndex,
-        onTap: _updateIndex,
-        items: _bottomNavBarItems,
+    return WillPopScope(
+      onWillPop: () async {
+        await _confirmSignOut();
+        return false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: backgroundPrimary2,
+          body: _listWidget[_currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: backgroundPrimary1,
+            unselectedLabelStyle: textButton2,
+            selectedLabelStyle: textButton2,
+            currentIndex: _currentIndex,
+            onTap: _updateIndex,
+            items: _bottomNavBarItems,
+          ),
+        ),
       ),
     );
   }

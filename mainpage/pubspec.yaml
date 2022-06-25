@@ -8,6 +8,8 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  android_alarm_manager_plus: ^2.0.5
+  bloc: ^8.0.3
   cached_network_image: ^3.2.1
   cloud_firestore: ^3.1.17
   core:
@@ -16,11 +18,10 @@ dependencies:
   firebase_auth: ^3.3.19
   flutter:
     sdk: flutter
-  shared_preferences: ^2.0.15
-  bloc: ^8.0.3
   flutter_bloc: ^8.0.1
-  android_alarm_manager_plus: ^2.0.5
   flutter_local_notifications: ^9.6.0
+  google_sign_in: ^5.3.3
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_lints: ^1.0.0

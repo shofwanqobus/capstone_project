@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "433958702719-nq1em22cs0k7sjqt7mu2a8mnrhsgs4cg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.be_traveled",
+            "certificate_hash": "5bffd914256ae189589d6a04960f64410accd362"
+          }
+        },
+        {
           "client_id": "433958702719-6t81lvdm496318nf84uop752q05e35i7.apps.googleusercontent.com",
           "client_type": 3
         }

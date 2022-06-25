@@ -66,6 +66,21 @@ class SettingsPage extends StatelessWidget {
               text: "Log Out",
               backgroundColor: Colors.red[400]!,
               onTap: () async {
+                // TODO: Caching Data, check version by hashing
+
+                /* print(DateTime.now().toIso8601String());
+                var text = "";
+                var chars =
+                    "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+                for (var i = 0; i < 128; i++) {
+                  var selected = chars[Random().nextInt(chars.length)];
+
+                  text += selected;
+                }
+
+                print(text); */
+
                 final prefs = await SharedPreferences.getInstance();
                 prefs.remove("data");
 

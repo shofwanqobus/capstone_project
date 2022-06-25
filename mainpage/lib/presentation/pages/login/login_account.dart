@@ -242,6 +242,18 @@ class _LoginAccount extends State<LoginAccount> {
                       authErrorMessage = "User not found";
                       signInLoading = false;
                     });
+                  } else if (e.code == "wrong-password") {
+                    setState(() {
+                      passwordError = true;
+                      passwordErrorMessage = "Wrong password";
+                      signInLoading = false;
+                    });
+                  } else {
+                    setState(() {
+                      authError = true;
+                      authErrorMessage = "Unexpected error";
+                      signInLoading = false;
+                    });
                   }
                 } catch (e) {
                   //

@@ -5,7 +5,6 @@ import 'package:mainpage/mainpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/presentation/provider/database_provider.dart';
-import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
 import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
 import 'package:provider/provider.dart';
