@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:mainpage/data/models/trip_model.dart';
+import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -41,15 +42,46 @@ class TripDetailPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Colors.white54,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.favorite_outline_outlined,
-                        color: Colors.red,
-                      ),
-                      onPressed: () {},
-                    ),
+                  Consumer<FavoriteDatabaseProvider>(
+                    builder: (context, value, child) {
+                      context
+                          .read<FavoriteDatabaseProvider>()
+                          .isTripFavoritedById(trip.id);
+
+                      return CircleAvatar(
+                        backgroundColor: Colors.white54,
+                        child: IconButton(
+                          icon: Icon(
+                            value.isTripFavorited
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_outlined,
+                            color: Colors.red,
+                          ),
+                          onPressed: () async {
+                            await context
+                                .read<FavoriteDatabaseProvider>()
+                                .setFavoriteTrip(trip);
+
+                            final alreadyFavorited = value.isTripFavorited;
+
+                            String message;
+
+                            if (alreadyFavorited) {
+                              message = "Removed from favorite";
+                            } else {
+                              message = "added to favorite";
+                            }
+
+                            final snackBar = SnackBar(
+                              content: Text(message),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -182,11 +214,11 @@ class TripDetailPage extends StatelessWidget {
             databaseHelper: DatabaseHelper(),
           ),
         ),
-        // ChangeNotifierProvider<FavDatabaseProvider>(
-        //   create: (_) => FavDatabaseProvider(
-        //     databaseHelper: DatabaseHelper(),
-        //   ),
-        // ),
+        ChangeNotifierProvider<FavoriteDatabaseProvider>(
+          create: (_) => FavoriteDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
       ],
       child: Scaffold(body: _details(context)),
     );

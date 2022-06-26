@@ -20,11 +20,11 @@ class DetailPage extends StatelessWidget {
             databaseHelper: DatabaseHelper(),
           ),
         ),
-        // ChangeNotifierProvider<FavDatabaseProvider>(
-        //   create: (_) => FavDatabaseProvider(
-        //     databaseHelper: DatabaseHelper(),
-        //   ),
-        // ),
+        ChangeNotifierProvider<FavoriteDatabaseProvider>(
+          create: (_) => FavoriteDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
       ],
       child: Scaffold(body: _details(context)),
     );
@@ -61,32 +61,47 @@ class DetailPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  // Consumer<FavDatabaseProvider>(
-                  //   builder: (context, provider, child) {
-                  //     return FutureBuilder<bool>(
-                  //       future: provider.isFavorited(hotel.id),
-                  //       builder: ((context, snapshot) {
-                  //         var isFavorited = snapshot.data ?? false;
-                  //         return CircleAvatar(
-                  //           backgroundColor: Colors.white54,
-                  //           child: isFavorited
-                  //               ? IconButton(
-                  //                   icon: const Icon(Icons.favorite),
-                  //                   color: Colors.red,
-                  //                   onPressed: () =>
-                  //                       provider.removeFavoriteHotel(hotel.id),
-                  //                 )
-                  //               : IconButton(
-                  //                   icon: const Icon(Icons.favorite_border),
-                  //                   color: Colors.red,
-                  //                   onPressed: () =>
-                  //                       provider.addFavoritedHotel(hotel),
-                  //                 ),
-                  //         );
-                  //       }),
-                  //     );
-                  //   },
-                  // ),
+                  Consumer<FavoriteDatabaseProvider>(
+                    builder: (context, provider, child) {
+                      context
+                          .read<FavoriteDatabaseProvider>()
+                          .isHotelFavoritedById(hotel.id);
+
+                      return CircleAvatar(
+                        backgroundColor: Colors.white54,
+                        child: IconButton(
+                          icon: Icon(
+                            provider.isHotelFavorited
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_outlined,
+                            color: Colors.red,
+                          ),
+                          onPressed: () async {
+                            await context
+                                .read<FavoriteDatabaseProvider>()
+                                .setFavoriteHotel(hotel);
+
+                            final alreadyFavorited = provider.isHotelFavorited;
+
+                            String message;
+
+                            if (alreadyFavorited) {
+                              message = "Removed from favorite";
+                            } else {
+                              message = "added to favorite";
+                            }
+
+                            final snackBar = SnackBar(
+                              content: Text(message),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

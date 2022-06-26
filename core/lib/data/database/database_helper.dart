@@ -26,6 +26,7 @@ class DatabaseHelper {
 
   static const String _favHotels = 'fav_hotel';
   static const String _favTrips = 'fav_trip';
+  static const String _version = "version";
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
@@ -36,8 +37,7 @@ class DatabaseHelper {
   }
 
   void _onCreate(Database db, int version) async {
-    await db.execute(
-        '''
+    await db.execute('''
       CREATE TABLE  $_tblHotel (
         id TEXT PRIMARY KEY,
         name TEXT,
@@ -49,8 +49,7 @@ class DatabaseHelper {
       );
     ''');
 
-    await db.execute(
-        '''
+    await db.execute('''
       CREATE TABLE  $_tblTrip (
         id INTEGER PRIMARY KEY,
         name TEXT,
@@ -62,8 +61,7 @@ class DatabaseHelper {
       );
     ''');
 
-    await db.execute(
-        '''
+    await db.execute('''
       CREATE TABLE  $_tblTicket (
         id TEXT PRIMARY KEY,
         name TEXT,
@@ -74,8 +72,7 @@ class DatabaseHelper {
       );
     ''');
 
-    await db.execute(
-        '''
+    await db.execute('''
       CREATE TABLE  $_favHotels (
         id TEXT PRIMARY KEY,
         name TEXT,
@@ -87,8 +84,7 @@ class DatabaseHelper {
       );
     ''');
 
-    await db.execute(
-        '''
+    await db.execute('''
       CREATE TABLE  $_favTrips (
         id INTEGER PRIMARY KEY,
         name TEXT,
@@ -180,5 +176,75 @@ class DatabaseHelper {
     } else {
       return null;
     }
+  }
+
+  Future<List<TripItemsModel>> getFavoriteTrip() async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db!.query(_favTrips);
+
+    return result.map((data) => TripItemsModel.fromJson(data)).toList();
+  }
+
+  Future<List<HotelItemsModel>> getFavoriteHotels() async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db!.query(_favHotels);
+
+    return result.map((data) => HotelItemsModel.fromJson(data)).toList();
+  }
+
+  Future<bool> getFavoriteTripById(int id) async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db!.query(
+      _favTrips,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    final mappedResult =
+        result.map((data) => TripItemsModel.fromJson(data)).toList();
+
+    if (mappedResult.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<bool> getFavoriteHotelById(String id) async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db!.query(
+      _favHotels,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    final mappedResult =
+        result.map((data) => HotelItemsModel.fromJson(data)).toList();
+
+    if (mappedResult.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<void> addFavoriteTrip(TripItemsModel trip) async {
+    final db = await database;
+    await db!.insert(_favTrips, trip.toJson());
+  }
+
+  Future<void> addFavoriteHotel(HotelItemsModel hotel) async {
+    final db = await database;
+    await db!.insert(_favHotels, hotel.toJson());
+  }
+
+  Future<void> removeFavoriteTripById(int id) async {
+    final db = await database;
+    await db!.delete(_favTrips, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> removeFavoriteHotelById(String id) async {
+    final db = await database;
+    await db!.delete(_favHotels, where: 'id = ?', whereArgs: [id]);
   }
 }
