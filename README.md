@@ -1,16 +1,16 @@
 # Be Traveled
 
-This project is made as a capstone project in MSIB (_Magang dan Studi Independen Bersertifikat_) From Kampus Merdeka and Dicoding.
+Projek ini dibuat sebagai **Capstone Project** di program MSIB (_Magang dan Studi Independen Bersertifikat_) dari Kampus Merdeka x Dicoding.
+
 Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik itu hotel dan melakukan trip wisata. Selain itu, adapun fitur tiket pesawat bagi wisatawan yang ingin berlibur ke sebuah negara.
 
-## Implemented Features
-- Authentication
-- Favorite a Trip/Hotel
-- Booked a Hotel/Trip/Plane Tickets
-- Detail from Hotel/Trip
+## Fitur yang tersedia
+- Otentikasi melalui akun aplikasi atau akun google
+- Favorit Trip/Hotel yng disukai
+- Booking Hotel/Trip/Plane/Ticket
+- Detail dari Hotel/Trip
+- User
 - ...
-
-# Resources
 
 ## Tools
 - Visual Studio Code
