@@ -5,6 +5,7 @@ import 'package:mainpage/mainpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/presentation/provider/database_provider.dart';
+import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
 import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const begin = Offset(1.0, 0.0);
+    const end = Offset.zero;
+    const curve = Curves.ease;
+
+    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -37,21 +44,54 @@ class MyApp extends StatelessWidget {
             databaseHelper: DatabaseHelper(),
           ),
         ),
+        ChangeNotifierProvider<FavoriteDatabaseProvider>(
+          create: (_) => FavoriteDatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        ),
       ],
       child: MaterialApp(
         initialRoute: splashScreen,
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case splashScreen:
-              return MaterialPageRoute(builder: (_) => const SplashScreen());
+              return MaterialPageRoute(
+                builder: (_) => const SplashScreen(),
+              );
             case logInChoice:
-              return MaterialPageRoute(builder: (_) => const LoginChoice());
+              return MaterialPageRoute(
+                builder: (_) => const LoginChoice(),
+              );
             case signUpAccount:
-              return MaterialPageRoute(builder: (_) => const SignUpAccount());
+              return PageRouteBuilder(
+                pageBuilder: (_, __, ___) => const SignUpAccount(),
+                transitionsBuilder: (_, animation, __, child) {
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
+              );
             case logInAccount:
-              return MaterialPageRoute(builder: (_) => const LoginAccount());
+              return PageRouteBuilder(
+                pageBuilder: (_, __, ___) => const LoginAccount(),
+                transitionsBuilder: (_, animation, __, child) {
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
+              );
             case homePage:
-              return MaterialPageRoute(builder: (_) => const HomePage());
+              return PageRouteBuilder(
+                pageBuilder: (_, __, ___) => const HomePage(),
+                transitionsBuilder: (_, animation, __, child) {
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
+              );
             case detailPage:
               return MaterialPageRoute(
                 builder: (_) => DetailPage(
@@ -124,8 +164,14 @@ class MyApp extends StatelessWidget {
                 builder: (_) => const UserReviews(),
               );
             case userReview:
-              return MaterialPageRoute(
-                builder: (_) => const UserReview(),
+              return PageRouteBuilder(
+                pageBuilder: (_, __, ___) => const LoginAccount(),
+                transitionsBuilder: (_, animation, __, child) {
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
               );
           }
           return null;

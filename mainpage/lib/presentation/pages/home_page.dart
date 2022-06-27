@@ -8,6 +8,7 @@ import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:mainpage/presentation/pages/details/trip_detail_screen.dart';
 import 'package:mainpage/presentation/provider/database_provider.dart';
+import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
 import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
 
@@ -84,26 +85,7 @@ class _HomePage extends State<HomePage> {
 
   final List<Widget> _listWidget = [
     const HomeScreen(),
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<DatabaseProvider>(
-          create: (_) => DatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
-        ChangeNotifierProvider<TicketDatabaseProvider>(
-          create: (_) => TicketDatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
-        ChangeNotifierProvider<TripDatabaseProvider>(
-          create: (_) => TripDatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
-      ],
-      child: const BookedPage(),
-    ),
+    const BookedPage(),
     const SearchPage(),
     const UserPage(),
     const SettingsPage(),

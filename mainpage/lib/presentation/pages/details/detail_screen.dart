@@ -20,11 +20,6 @@ class DetailPage extends StatelessWidget {
             databaseHelper: DatabaseHelper(),
           ),
         ),
-        ChangeNotifierProvider<FavoriteDatabaseProvider>(
-          create: (_) => FavoriteDatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
       ],
       child: Scaffold(body: _details(context)),
     );

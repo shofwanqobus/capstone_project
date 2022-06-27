@@ -126,7 +126,34 @@ class UserPage extends StatelessWidget {
                 print("get data error: ${snapshot.error}");
                 return const Center(child: Text("Error"));
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return Column(
+                  children: [
+                    const Center(child: CircularProgressIndicator()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: const [
+                            MediumText(text: "Total Trip"),
+                            MediumText(text: "0"),
+                          ],
+                        ),
+                        Column(
+                          children: const [
+                            MediumText(text: "Points"),
+                            MediumText(text: "0"),
+                          ],
+                        ),
+                        Column(
+                          children: const [
+                            MediumText(text: "Member"),
+                            MediumText(text: ""),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                );
               }
             },
           ),

@@ -24,12 +24,7 @@ class UserFavorite extends StatelessWidget {
     return Scaffold(
       appBar: favoriteAppBar(),
       backgroundColor: backgroundPrimary2,
-      body: ChangeNotifierProvider(
-        create: (_) => FavoriteDatabaseProvider(
-          databaseHelper: DatabaseHelper(),
-        ),
-        child: userFavoriteBody(context),
-      ),
+      body: userFavoriteBody(context),
     );
   }
 }
@@ -52,7 +47,9 @@ Widget userFavoriteBody(BuildContext context) {
             value.getFavoriteHotels();
 
             if (value.hotelState == ResultState.hasData) {
-              return Expanded(
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                height: 200,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   scrollDirection: Axis.vertical,
@@ -63,9 +60,16 @@ Widget userFavoriteBody(BuildContext context) {
                 ),
               );
             } else if (value.hotelState == ResultState.noData) {
-              return Text("no Data");
+              return Center(
+                child: Column(
+                  children: const [
+                    Icon(Icons.info),
+                    Text("No Favorite yet"),
+                  ],
+                ),
+              );
             } else {
-              return Text("Loading / Error");
+              return const Center(child: Icon(Icons.hourglass_empty));
             }
           },
         ),
@@ -82,7 +86,9 @@ Widget userFavoriteBody(BuildContext context) {
             value.getFavoriteTrips();
 
             if (value.tripState == ResultState.hasData) {
-              return Expanded(
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 32),
+                height: 200,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   scrollDirection: Axis.vertical,
@@ -93,9 +99,16 @@ Widget userFavoriteBody(BuildContext context) {
                 ),
               );
             } else if (value.tripState == ResultState.noData) {
-              return Text("no Data");
+              return Center(
+                child: Column(
+                  children: const [
+                    Icon(Icons.info),
+                    Text("No Favorite yet"),
+                  ],
+                ),
+              );
             } else {
-              return Text("Loading / Error");
+              return const Center(child: Icon(Icons.hourglass_empty));
             }
           },
         ),

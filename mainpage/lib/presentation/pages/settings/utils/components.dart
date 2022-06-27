@@ -7,13 +7,13 @@ class SettingsButton extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.onTap,
-    this.backgroundColor = backgroundPrimary1,
+    this.backgroundColor,
   }) : super(key: key);
 
   final IconData icon;
   final String text;
   final Function() onTap;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SettingsButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color: backgroundColor ?? backgroundPrimary1,
           borderRadius: const BorderRadius.all(Radius.circular(6)),
         ),
         width: 240,

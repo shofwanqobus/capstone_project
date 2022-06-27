@@ -207,20 +207,8 @@ class TripDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<TripDatabaseProvider>(
-          create: (_) => TripDatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
-        ChangeNotifierProvider<FavoriteDatabaseProvider>(
-          create: (_) => FavoriteDatabaseProvider(
-            databaseHelper: DatabaseHelper(),
-          ),
-        ),
-      ],
-      child: Scaffold(body: _details(context)),
+    return Scaffold(
+      body: _details(context),
     );
   }
 }

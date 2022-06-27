@@ -41,6 +41,56 @@ class SettingsPage extends StatelessWidget {
 }
 
 Widget userSettingsBody(BuildContext context) {
+  Future<void> _confirmSignOut() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(child: Text("Confirmation")),
+          content: SingleChildScrollView(
+            child: Column(
+              children: const [
+                Text("Sign out?"),
+              ],
+            ),
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red[400],
+              ),
+              child: const Text("Confirm"),
+              onPressed: () async {
+                try {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.remove("data");
+
+                  await _auth.signOut();
+
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                } catch (e) {
+                  print(e);
+                }
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: backgroundPrimary1,
+              ),
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -68,15 +118,29 @@ Widget userSettingsBody(BuildContext context) {
           icon: Icons.account_circle,
           text: "Change Account",
           onTap: () {
+            final _isSignedGoogle =
+                _auth.currentUser!.providerData[0].providerId == "google.com";
+            if (_isSignedGoogle) return;
             Navigator.pushNamed(context, settingsChangeAccount);
           },
+          backgroundColor:
+              _auth.currentUser!.providerData[0].providerId == "google.com"
+                  ? Colors.black54
+                  : backgroundPrimary1,
         ),
         SettingsButton(
           icon: Icons.manage_accounts_rounded,
           text: "Account Settings",
           onTap: () {
+            final _isSignedGoogle =
+                _auth.currentUser!.providerData[0].providerId == "google.com";
+            if (_isSignedGoogle) return;
             Navigator.pushNamed(context, settingsPasswordConfirmation);
           },
+          backgroundColor:
+              _auth.currentUser!.providerData[0].providerId == "google.com"
+                  ? Colors.black54
+                  : backgroundPrimary1,
         ),
         Consumer<FavoriteDatabaseProvider>(
           builder: ((context, value, child) {
@@ -85,26 +149,10 @@ Widget userSettingsBody(BuildContext context) {
               text: "Log Out",
               backgroundColor: Colors.red[400]!,
               onTap: () async {
-                // TODO: Caching Data, check version by hashing
+                // print(DateTime.now().toIso8601String());
 
-                /* print(DateTime.now().toIso8601String());
-                var text = "";
-                var chars =
-                    "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-                for (var i = 0; i < 128; i++) {
-                  var selected = chars[Random().nextInt(chars.length)];
-
-                  text += selected;
-                }
-
-                print(text); */
-
-                final prefs = await SharedPreferences.getInstance();
-                prefs.remove("data");
-
-                await _auth.signOut();
-                Navigator.pop(context);
+                await _confirmSignOut();
+                return false;
               },
             );
           }),
