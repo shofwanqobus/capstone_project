@@ -32,5 +32,5 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 - Pilih pada bagian Login with Account
 - Jika anda belum memiliki akun, klik pada bagian Sign Up now
 - Masukan data diri seperti username, email, password, no handphone, dan tanggal lahir
-- Jika anda sudah memiliki akun, anda dapat dengan langsung login dengan akun yang sudah dibuat (email: pengunjung@gmail.com, password: asdf1234)
+- Jika anda sudah memiliki akun, anda dapat dengan langsung login dengan akun yang sudah dibuat (email: a@a.com, password: 123456)
 - Setelah login, akan muncul halaman homepage dengan hotel dan trip. Jika anda ingin memesan tiket, anda dapat klik icon ticket pada homepage
