@@ -54,6 +54,7 @@ flutter:
     - assets/local_hotel.json
     - assets/local_trip.json
     - assets/local_ticket_pesawat.json
+    - assets/be_traveled.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

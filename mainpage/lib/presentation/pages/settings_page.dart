@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mainpage/presentation/pages/settings/Utils/components.dart';
-import 'package:mainpage/presentation/provider/database_provider.dart';
 import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';

@@ -7,12 +7,6 @@ import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:mainpage/presentation/pages/details/trip_detail_screen.dart';
-import 'package:mainpage/presentation/provider/database_provider.dart';
-import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
-import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
-import 'package:mainpage/presentation/provider/trip_database_provider.dart';
-
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {

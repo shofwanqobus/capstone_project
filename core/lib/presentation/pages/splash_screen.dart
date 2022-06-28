@@ -27,23 +27,8 @@ class _SplashScreen extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPrimary1,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-            child: Icon(
-              Icons.airplanemode_active,
-              size: 200,
-              color: backgroundPrimary2,
-            ),
-          ),
-          Center(
-            child: Text(
-              'Be Traveled',
-              style: kHeading4,
-            ),
-          ),
-        ],
+      body: Center(
+        child: Image.asset('assets/be_traveled.png'),
       ),
     );
   }

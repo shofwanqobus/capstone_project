@@ -60,7 +60,7 @@ class _LoginChoice extends State<LoginChoice> {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 125),
           Center(
             child: Column(
               children: [
