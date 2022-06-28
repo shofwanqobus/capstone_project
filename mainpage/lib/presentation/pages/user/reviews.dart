@@ -17,44 +17,14 @@ class UserReviews extends StatelessWidget {
     return Scaffold(
       appBar: reviews(),
       backgroundColor: backgroundPrimary2,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 12.0),
-              Center(
-                child: Text("Reviews", style: kHeading6),
-              ),
-              Text(
-                "Place/Trip (1)",
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(height: 8.0),
-              ReviewCard(
-                onTap: () {
-                  Navigator.pushNamed(context, userReview);
-                },
-              ),
-              ReviewCard(
-                onTap: () {
-                  Navigator.pushNamed(context, userReview);
-                },
-              ),
-              ReviewCard(
-                onTap: () {
-                  Navigator.pushNamed(context, userReview);
-                },
-              ),
-              const SizedBox(height: 14.0),
-              Text(
-                "Tickets (0)",
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.speaker, size: 75, color: black),
+            const SizedBox(height: 5),
+            Text('Coming Soon!', style: kHeading6),
+          ],
         ),
       ),
     );

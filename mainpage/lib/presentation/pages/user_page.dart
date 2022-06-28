@@ -73,7 +73,7 @@ class UserPage extends StatelessWidget {
                                   ),
                             radius: 40,
                           ),
-                          const SizedBox(width: 16.0),
+                          const SizedBox(width: 60.0),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -90,7 +90,8 @@ class UserPage extends StatelessWidget {
                               ),
                               const MediumText(text: "How's your day?"),
                               const MediumText(
-                                  text: "We hope that you're fine"),
+                                text: "We hope that you're fine",
+                              ),
                             ],
                           ),
                         ],
@@ -158,7 +159,7 @@ class UserPage extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 125.0),
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
