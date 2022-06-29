@@ -16,6 +16,8 @@ class LoginChoice extends StatefulWidget {
 
 class _LoginChoice extends State<LoginChoice> {
   final _db = FirebaseFirestore.instance;
+
+  bool _googleLoading = false;
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _user;
   GoogleSignInAccount get user => _user!;
@@ -67,11 +69,17 @@ class _LoginChoice extends State<LoginChoice> {
                 InkWell(
                   onTap: () async {
                     try {
+                      setState(() => _googleLoading = true);
+
                       await googleSignIn.signOut();
 
                       final googleUser = await googleSignIn.signIn();
 
-                      if (googleUser == null) return;
+                      if (googleUser == null) {
+                        setState(() => _googleLoading = false);
+
+                        return;
+                      }
 
                       _user = googleUser;
 
@@ -96,7 +104,7 @@ class _LoginChoice extends State<LoginChoice> {
                           }
                         },
                         // onError: (e) => print("Error getting document: $e"),
-                      ).catchError((e) {
+                      ).catchError((e) async {
                         print(
                             "debug: user data is not in database, creating...");
 
@@ -108,17 +116,26 @@ class _LoginChoice extends State<LoginChoice> {
                           "email": googleUser.email,
                           "phoneNumber": null,
                           "dateOfBirth": null,
+                          "booked": {
+                            "hotels": [],
+                            "trips": [],
+                            "tickets": [],
+                          },
                           "favorites": {
-                            "place": [],
+                            "hotels": [],
+                            "trips": [],
                           },
                           "reviews": {
-                            "place": [],
+                            "hotels": [],
+                            "trips": [],
                           },
                           "recentPlaces": [],
                           "totalTrip": 0,
                           "points": 0,
                           "member": "bronze",
                         };
+
+                        await prefs.setString("data", json.encode(insertUser));
 
                         _db
                             .collection("users")
@@ -135,6 +152,38 @@ class _LoginChoice extends State<LoginChoice> {
                         (DocumentSnapshot doc) async {
                           final data = doc.data() as Map<String, dynamic>;
                           await prefs.setString("data", json.encode(data));
+
+                          final favTrips = data["favorites"]["trips"];
+                          final favHotels = data["favorites"]["hotels"];
+
+                          final bookedHotels = data["booked"]["hotels"];
+                          final bookedTrips = data["booked"]["trips"];
+                          final bookedTickets = data["booked"]["tickets"];
+
+                          DatabaseHelper _databaseHelper = DatabaseHelper();
+
+                          await _databaseHelper.clearcache();
+
+                          if (favTrips is String) {
+                            await _databaseHelper.setFavoriteTrips(favTrips);
+                          }
+
+                          if (favHotels is String) {
+                            await _databaseHelper.setFavoriteHotels(favHotels);
+                          }
+
+                          if (bookedHotels is String) {
+                            await _databaseHelper.setBookedHotels(bookedHotels);
+                          }
+
+                          if (bookedTrips is String) {
+                            await _databaseHelper.setBookedTrips(bookedTrips);
+                          }
+
+                          if (bookedTickets is String) {
+                            await _databaseHelper
+                                .setBookedTickets(bookedTickets);
+                          }
                         },
                         // onError: (e) => print("Error getting document: $e"),
                       );
@@ -160,17 +209,24 @@ class _LoginChoice extends State<LoginChoice> {
                         const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.g_mobiledata,
-                          color: Colors.black,
-                          size: 40,
-                        ),
-                        const SizedBox(width: 12),
-                        Text('Login with Google', style: kSubtitle),
-                      ],
-                    ),
+                    child: _googleLoading
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Center(child: CircularProgressIndicator()),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              const Icon(
+                                Icons.g_mobiledata,
+                                color: Colors.black,
+                                size: 40,
+                              ),
+                              const SizedBox(width: 12),
+                              Text('Login with Google', style: kSubtitle),
+                            ],
+                          ),
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -203,7 +259,13 @@ class _LoginChoice extends State<LoginChoice> {
                 ),
                 const SizedBox(height: 5),
                 InkWell(
-                  onTap: () => Navigator.pushNamed(context, signUpAccount),
+                  onTap: () async {
+                    final prefs = await SharedPreferences.getInstance();
+
+                    prefs.setBool("signup-from-signin", false);
+
+                    Navigator.pushNamed(context, signUpAccount);
+                  },
                   child: Container(
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(

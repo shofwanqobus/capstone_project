@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:intl/intl.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/presentation/provider/database_provider.dart';
 import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
@@ -26,8 +27,12 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget _details(BuildContext context) {
+    NumberFormat currencyFormatter =
+        NumberFormat.currency(locale: 'IDR', symbol: "Rp. ");
+
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -72,10 +77,6 @@ class DetailPage extends StatelessWidget {
                             color: Colors.red,
                           ),
                           onPressed: () async {
-                            await context
-                                .read<FavoriteDatabaseProvider>()
-                                .setFavoriteHotel(hotel);
-
                             final alreadyFavorited = provider.isHotelFavorited;
 
                             String message;
@@ -92,6 +93,10 @@ class DetailPage extends StatelessWidget {
 
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
+
+                            await context
+                                .read<FavoriteDatabaseProvider>()
+                                .setFavoriteHotel(hotel);
                           },
                         ),
                       );
@@ -145,7 +150,8 @@ class DetailPage extends StatelessWidget {
                                   Icons.price_change,
                                   color: Colors.amber[400],
                                 ),
-                                Text('Rp. ${hotel.price}', style: kBodyText),
+                                Text(currencyFormatter.format(hotel.price),
+                                    style: kBodyText),
                               ],
                             ),
                           ],

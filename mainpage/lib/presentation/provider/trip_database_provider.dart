@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mainpage/data/models/trip_model.dart';
 
@@ -46,6 +50,24 @@ class TripDatabaseProvider extends ChangeNotifier {
   void bookedTrip(TripItemsModel trip) async {
     try {
       await databaseHelper.bookedTrip(trip);
+
+      final _auth = FirebaseAuth.instance;
+      final _db = FirebaseFirestore.instance;
+      final email = _auth.currentUser!.email;
+      final docRef = _db.collection("users").doc(email);
+
+      List<TripItemsModel> result = await databaseHelper.getBookedTrip();
+
+      docRef.get().then(
+        (DocumentSnapshot doc) async {
+          final data = doc.data() as Map<String, dynamic>;
+
+          data["booked"]["trips"] = json.encode(result);
+
+          await docRef.update(data);
+        },
+      );
+
       _getBookedTrip();
     } catch (e) {
       _resultState = ResultState.error;

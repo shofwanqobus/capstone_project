@@ -2,7 +2,9 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mainpage/mainpage.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpAccount extends StatefulWidget {
   const SignUpAccount({Key? key}) : super(key: key);
@@ -33,6 +35,8 @@ class _SignUpAccount extends State<SignUpAccount> {
 
   late String dateOfBirth = "";
   late bool dateOfBirthError = false;
+
+  TextEditingController dateController = TextEditingController();
 
   late bool checkbox = false;
   late bool checkboxError = false;
@@ -224,12 +228,27 @@ class _SignUpAccount extends State<SignUpAccount> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                onChanged: (query) {
-                  dateOfBirth = query;
+                onTap: () {
+                  showDatePicker(
+                    context: context,
+                    initialDate: DateTime(2000),
+                    firstDate: DateTime(1950),
+                    lastDate: DateTime(2022),
+                  ).then((date) {
+                    setState(() {
+                      dateController.text =
+                          "${date!.day} / ${date.month} / ${date.year}";
+
+                      dateOfBirth =
+                          "${date.day} / ${date.month} / ${date.year}";
+                    });
+                  });
                   if (dateOfBirthError) {
                     setState(() => dateOfBirthError = false);
                   }
                 },
+                readOnly: true,
+                controller: dateController,
                 key: const Key('date-of-birth'),
                 decoration: InputDecoration(
                   errorText:
@@ -327,11 +346,30 @@ class _SignUpAccount extends State<SignUpAccount> {
 
                   final insertUser = <String, dynamic>{
                     "id": newUser.user!.uid,
+                    "photoUrl": null,
+                    "provider": "google",
                     "username": username,
                     "email": email,
                     "password": password,
                     "phone_number": phoneNumber,
                     "date_of_birth": dateOfBirth,
+                    "booked": {
+                      "hotels": [],
+                      "trips": [],
+                      "tickets": [],
+                    },
+                    "favorites": {
+                      "hotels": [],
+                      "trips": [],
+                    },
+                    "reviews": {
+                      "hotels": [],
+                      "trips": [],
+                    },
+                    "recentPlaces": [],
+                    "totalTrip": 0,
+                    "points": 0,
+                    "member": "bronze",
                   };
 
                   _db.collection("users").doc(email).set(insertUser);
@@ -344,7 +382,17 @@ class _SignUpAccount extends State<SignUpAccount> {
 
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-                  Navigator.pushNamed(context, logInAccount);
+                  Navigator.pop(context);
+
+                  final prefs = await SharedPreferences.getInstance();
+
+                  final fromSignIn = prefs.getBool("signup-from-signin");
+
+                  if (fromSignIn == true) {
+                    //
+                  } else {
+                    Navigator.pushNamed(context, logInAccount);
+                  }
                 } catch (e) {
                   // TODO: Error message, example: email poorly written, ...
                   print("signup error: $e");

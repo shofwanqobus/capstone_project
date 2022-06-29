@@ -22,35 +22,16 @@ class _LanguageState extends State<SettingsSchedule> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: settingsAppBar(),
-      body: Column(
-        children: [
-          const SizedBox(height: 12.0),
-          Center(
-            child: Text(
-              "Schedule",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                'Notification',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              Switch.adaptive(
-                value: _notification,
-                onChanged: (value) {
-                  setState(() {
-                    _notification = value;
-                  });
-                },
-              ),
-            ],
-          )
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.speaker, size: 75, color: black),
+            const SizedBox(height: 5),
+            Text('Coming Soon!', style: kHeading6),
+          ],
+        ),
       ),
-      backgroundColor: backgroundPrimary2,
     );
   }
 }

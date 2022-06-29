@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/data/models/trip_model.dart';
@@ -25,6 +29,9 @@ class FavoriteDatabaseProvider extends ChangeNotifier {
 
   List<TripItemsModel> _favoriteTrips = [];
   List<TripItemsModel> get favoriteTrips => _favoriteTrips;
+
+  final _db = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
 
   void getFavoriteTrips() async {
     final result = await databaseHelper.getFavoriteTrip();
@@ -63,11 +70,27 @@ class FavoriteDatabaseProvider extends ChangeNotifier {
 
     if (isExists) {
       await databaseHelper.removeFavoriteTripById(trip.id);
-      isTripFavoritedById(trip.id);
     } else {
       await databaseHelper.addFavoriteTrip(trip);
-      isTripFavoritedById(trip.id);
     }
+
+    final email = _auth.currentUser!.email;
+
+    final docRef = _db.collection("users").doc(email);
+
+    List<TripItemsModel> result = await databaseHelper.getFavoriteTrip();
+
+    docRef.get().then(
+      (DocumentSnapshot doc) async {
+        final data = doc.data() as Map<String, dynamic>;
+
+        data["favorites"]["trips"] = json.encode(result);
+
+        await docRef.update(data);
+      },
+    );
+
+    isTripFavoritedById(trip.id);
   }
 
   Future<void> setFavoriteHotel(HotelItemsModel hotel) async {
@@ -75,11 +98,27 @@ class FavoriteDatabaseProvider extends ChangeNotifier {
 
     if (isExists) {
       await databaseHelper.removeFavoriteHotelById(hotel.id);
-      isHotelFavoritedById(hotel.id);
     } else {
       await databaseHelper.addFavoriteHotel(hotel);
-      isHotelFavoritedById(hotel.id);
     }
+
+    final email = _auth.currentUser!.email;
+
+    final docRef = _db.collection("users").doc(email);
+
+    List<HotelItemsModel> result = await databaseHelper.getFavoriteHotels();
+
+    docRef.get().then(
+      (DocumentSnapshot doc) async {
+        final data = doc.data() as Map<String, dynamic>;
+
+        data["favorites"]["hotels"] = json.encode(result);
+
+        await docRef.update(data);
+      },
+    );
+
+    isHotelFavoritedById(hotel.id);
   }
 
   bool _isTripFavorited = false;

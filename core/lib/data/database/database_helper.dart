@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/data/models/plane_ticket_model.dart';
@@ -26,7 +27,6 @@ class DatabaseHelper {
 
   static const String _favHotels = 'fav_hotel';
   static const String _favTrips = 'fav_trip';
-  static const String _version = "version";
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
@@ -246,5 +246,66 @@ class DatabaseHelper {
   Future<void> removeFavoriteHotelById(String id) async {
     final db = await database;
     await db!.delete(_favHotels, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> setFavoriteTrips(String trips) async {
+    final db = await database;
+
+    final data = json.decode(trips);
+
+    for (Map<String, dynamic> trip in data) {
+      await db!.insert(_favTrips, trip);
+    }
+  }
+
+  Future<void> setFavoriteHotels(String hotels) async {
+    final db = await database;
+
+    final data = json.decode(hotels);
+
+    for (Map<String, dynamic> hotel in data) {
+      await db!.insert(_favHotels, hotel);
+    }
+  }
+
+  Future<void> setBookedHotels(String hotels) async {
+    final db = await database;
+
+    final data = json.decode(hotels);
+
+    for (Map<String, dynamic> hotel in data) {
+      await db!.insert(_tblHotel, hotel);
+    }
+  }
+
+  Future<void> setBookedTrips(String trips) async {
+    final db = await database;
+
+    final data = json.decode(trips);
+
+    for (Map<String, dynamic> trip in data) {
+      await db!.insert(_tblTrip, trip);
+    }
+  }
+
+  Future<void> setBookedTickets(String tickets) async {
+    final db = await database;
+
+    final data = json.decode(tickets);
+
+    for (Map<String, dynamic> ticket in data) {
+      await db!.insert(_tblTicket, ticket);
+    }
+  }
+
+  Future<void> clearcache() async {
+    final db = await database;
+
+    await db!.delete(_favTrips);
+    await db.delete(_favHotels);
+
+    await db.delete(_tblHotel);
+    await db.delete(_tblTrip);
+    await db.delete(_tblTicket);
   }
 }

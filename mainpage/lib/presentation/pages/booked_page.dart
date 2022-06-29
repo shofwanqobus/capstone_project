@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/data/models/plane_ticket_model.dart';
 import 'package:mainpage/data/models/trip_model.dart';
@@ -8,6 +9,9 @@ import 'package:mainpage/presentation/provider/database_provider.dart';
 import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
 import 'package:provider/provider.dart';
+
+NumberFormat currencyFormatter =
+    NumberFormat.currency(locale: 'IDR', symbol: "Rp. ");
 
 class BookedPage extends StatefulWidget {
   const BookedPage({Key? key}) : super(key: key);
@@ -32,9 +36,9 @@ class _BookedPageState extends State<BookedPage> {
           title: Text('Booked', style: button),
           bottom: const TabBar(
             tabs: [
-              Tab(text: 'Place'),
+              Tab(text: 'Hotels'),
               Tab(text: 'Tickets'),
-              Tab(text: 'Trip'),
+              Tab(text: 'Trips'),
             ],
           ),
         ),
@@ -131,7 +135,9 @@ class PlaceTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(hotel.address),
-                  Text('Rp. ${hotel.price}'),
+                  Text(
+                    currencyFormatter.format(hotel.price),
+                  ),
                 ],
               ),
             ),
@@ -213,7 +219,9 @@ class TicketTab extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 3),
-                    Text('Rp. ${tickets.price}'),
+                    Text(
+                      currencyFormatter.format(tickets.price),
+                    ),
                   ],
                 ),
               ),
@@ -319,7 +327,9 @@ class TripTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(trip.location),
-                      Text('Rp. ${trip.price}'),
+                      Text(
+                        currencyFormatter.format(trip.price),
+                      ),
                     ],
                   ),
                 ),

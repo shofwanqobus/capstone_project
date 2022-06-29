@@ -24,42 +24,16 @@ class _LanguageState extends State<SettingsLanguage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: settingsAppBar(),
-      body: Column(
-        children: [
-          const SizedBox(height: 12.0),
-          Center(
-            child: Text(
-              "Language",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          ListTile(
-            title: const Text("Indonesia"),
-            leading: Radio<LanguageController>(
-              value: LanguageController.indonesia,
-              groupValue: _languageController,
-              onChanged: (LanguageController? value) {
-                setState(() {
-                  _languageController = value;
-                });
-              },
-            ),
-          ),
-          ListTile(
-            title: const Text("English"),
-            leading: Radio<LanguageController>(
-              value: LanguageController.english,
-              groupValue: _languageController,
-              onChanged: (LanguageController? value) {
-                setState(() {
-                  _languageController = value;
-                });
-              },
-            ),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.speaker, size: 75, color: black),
+            const SizedBox(height: 5),
+            Text('Coming Soon!', style: kHeading6),
+          ],
+        ),
       ),
-      backgroundColor: backgroundPrimary2,
     );
   }
 }

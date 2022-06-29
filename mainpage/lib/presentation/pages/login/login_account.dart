@@ -214,6 +214,45 @@ class _LoginAccount extends State<LoginAccount> {
                     (DocumentSnapshot doc) async {
                       final data = doc.data() as Map<String, dynamic>;
                       await prefs.setString("data", json.encode(data));
+
+                      final favTrips = data["favorites"]["trips"];
+                      final favHotels = data["favorites"]["hotels"];
+
+                      final bookedHotels = data["booked"]["hotels"];
+                      final bookedTrips = data["booked"]["trips"];
+                      final bookedTickets = data["booked"]["tickets"];
+
+                      DatabaseHelper _databaseHelper = DatabaseHelper();
+
+                      await _databaseHelper.clearcache();
+
+                      if (favTrips is String) {
+                        await _databaseHelper.setFavoriteTrips(favTrips);
+                      }
+
+                      if (favHotels is String) {
+                        await _databaseHelper.setFavoriteHotels(favHotels);
+                      }
+
+                      if (bookedHotels is String) {
+                        await _databaseHelper.setBookedHotels(bookedHotels);
+                      }
+
+                      if (bookedTrips is String) {
+                        await _databaseHelper.setBookedTrips(bookedTrips);
+                      }
+
+                      if (bookedTickets is String) {
+                        await _databaseHelper.setBookedTickets(bookedTickets);
+                      }
+                    },
+                    // onError: (e) => print("Error getting document: $e"),
+                  );
+
+                  docRef.get().then(
+                    (DocumentSnapshot doc) async {
+                      final data = doc.data() as Map<String, dynamic>;
+                      await prefs.setString("data", json.encode(data));
                     },
                     // onError: (e) => print("Error getting document: $e"),
                   );
@@ -273,7 +312,13 @@ class _LoginAccount extends State<LoginAccount> {
             ),
             const SizedBox(height: 5),
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, signUpAccount),
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+
+                prefs.setBool("signup-from-signin", true);
+
+                Navigator.pushNamed(context, signUpAccount);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

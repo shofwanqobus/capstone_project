@@ -8,8 +8,6 @@ import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/mainpage.dart';
 import 'package:mainpage/presentation/pages/details/trip_detail_screen.dart';
 
-import 'home_page.dart';
-
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -22,8 +20,8 @@ class _SearchPageState extends State<SearchPage> {
   var textInput = "";
   var state = "empty";
 
-  HotelModel? hotels = null;
-  TripModel? trips = null;
+  HotelModel? hotels;
+  TripModel? trips;
 
   void loadData() async {
     String hotelJsonStr =
@@ -217,75 +215,70 @@ class LastSearchText extends StatelessWidget {
 Widget _hotelCard(BuildContext context, HotelItemsModel hotel) {
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
-    child: Align(
-      alignment: Alignment.centerLeft,
-      child: SizedBox(
-        child: InkWell(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return DetailPage(hotel: hotel);
-            }),
-          ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                child: CachedNetworkImage(
-                  imageUrl: hotel.photoUrl!,
-                  height: 125,
-                  width: 125,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                  ),
-                ),
+    child: InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return DetailPage(hotel: hotel);
+        }),
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            child: CachedNetworkImage(
+              imageUrl: hotel.photoUrl!,
+              height: 125,
+              width: 125,
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(),
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(hotel.name, style: kBodyText),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            alignment: Alignment.centerLeft,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(hotel.name, style: kBodyText),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.amber[400],
-                              ),
-                              Text('${hotel.rating}', style: kBodyText),
-                            ],
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber[400],
                           ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.price_change,
-                                color: Colors.amber[400],
-                              ),
-                              Text('Rp. ${hotel.price}', style: kBodyText),
-                            ],
-                          ),
+                          Text('${hotel.rating}', style: kBodyText),
                         ],
                       ),
-                    ),
-                  ],
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.price_change,
+                            color: Colors.amber[400],
+                          ),
+                          Text('Rp. ${hotel.price}', style: kBodyText),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     ),
   );

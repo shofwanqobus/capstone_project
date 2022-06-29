@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:intl/intl.dart';
 import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/presentation/provider/favorited_database_provider.dart';
 import 'package:mainpage/presentation/provider/trip_database_provider.dart';
@@ -14,6 +15,10 @@ class TripDetailPage extends StatelessWidget {
   Widget _details(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
+    NumberFormat currencyFormatter =
+        NumberFormat.currency(locale: 'IDR', symbol: "Rp. ");
+
     return Scaffold(
       body: Stack(
         children: [
@@ -58,10 +63,6 @@ class TripDetailPage extends StatelessWidget {
                             color: Colors.red,
                           ),
                           onPressed: () async {
-                            await context
-                                .read<FavoriteDatabaseProvider>()
-                                .setFavoriteTrip(trip);
-
                             final alreadyFavorited = value.isTripFavorited;
 
                             String message;
@@ -78,6 +79,10 @@ class TripDetailPage extends StatelessWidget {
 
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
+
+                            await context
+                                .read<FavoriteDatabaseProvider>()
+                                .setFavoriteTrip(trip);
                           },
                         ),
                       );
@@ -131,7 +136,8 @@ class TripDetailPage extends StatelessWidget {
                                   Icons.price_change,
                                   color: Colors.amber[400],
                                 ),
-                                Text('Rp. ${trip.price}', style: kBodyText),
+                                Text(currencyFormatter.format(trip.price),
+                                    style: kBodyText),
                               ],
                             ),
                           ],

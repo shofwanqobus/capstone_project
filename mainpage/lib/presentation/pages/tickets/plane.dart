@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mainpage/data/models/plane_ticket_model.dart';
 import 'package:mainpage/presentation/provider/ticket_database_provider.dart';
 import 'package:provider/provider.dart';
@@ -65,6 +66,9 @@ class Plane extends StatelessWidget {
   }
 
   Widget _listTickets(BuildContext context, PlaneTicketItems tickets) {
+    NumberFormat currencyFormatter =
+        NumberFormat.currency(locale: 'IDR', symbol: "Rp. ");
+
     return Column(
       children: [
         Container(
@@ -78,46 +82,54 @@ class Plane extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(tickets.name, style: kHeading6),
-                  Text(tickets.routes, style: kBodyText),
-                  Text(tickets.location, style: kBodyText),
-                ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.60,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(tickets.name, style: kHeading6),
+                    Text(tickets.routes, style: kBodyText),
+                    Text(tickets.location, style: kBodyText),
+                  ],
+                ),
               ),
-              const SizedBox(width: 30),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Consumer<TicketDatabaseProvider>(
-                    builder: (context, provider, child) {
-                      return FutureBuilder<bool>(
-                        future: provider.isBooked(tickets.id),
-                        builder: (context, snapshot) {
-                          return ElevatedButton(
-                            onPressed: () => provider.bookedTicket(tickets),
-                            child: Text('Buy', style: textButton2),
-                            style: ElevatedButton.styleFrom(
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30.0),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.30,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Consumer<TicketDatabaseProvider>(
+                      builder: (context, provider, child) {
+                        return FutureBuilder<bool>(
+                          future: provider.isBooked(tickets.id),
+                          builder: (context, snapshot) {
+                            return ElevatedButton(
+                              onPressed: () => provider.bookedTicket(tickets),
+                              child: Text('Buy', style: textButton2),
+                              style: ElevatedButton.styleFrom(
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                shadowColor: Colors.black,
+                                primary: backgroundPrimary1,
+                                minimumSize: const Size(80, 40),
                               ),
-                              shadowColor: Colors.black,
-                              primary: backgroundPrimary1,
-                              minimumSize: const Size(80, 40),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  Text('Rp. ${tickets.price!}',
-                      style: kSubtitle, textAlign: TextAlign.center),
-                ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      currencyFormatter.format(tickets.price!),
+                      style: kSubtitle.copyWith(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

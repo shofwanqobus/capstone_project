@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 
@@ -46,6 +50,24 @@ class DatabaseProvider extends ChangeNotifier {
   void bookedHotel(HotelItemsModel hotel) async {
     try {
       await databaseHelper.bookedHotel(hotel);
+
+      final _auth = FirebaseAuth.instance;
+      final _db = FirebaseFirestore.instance;
+      final email = _auth.currentUser!.email;
+      final docRef = _db.collection("users").doc(email);
+
+      List<HotelItemsModel> result = await databaseHelper.getBookedHotel();
+
+      docRef.get().then(
+        (DocumentSnapshot doc) async {
+          final data = doc.data() as Map<String, dynamic>;
+
+          data["booked"]["hotels"] = json.encode(result);
+
+          await docRef.update(data);
+        },
+      );
+
       _getBookedHotel();
     } catch (e) {
       _resultState = ResultState.error;

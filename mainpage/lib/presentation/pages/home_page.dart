@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:intl/intl.dart';
 import 'package:mainpage/data/models/hotel_model.dart';
 import 'package:mainpage/data/models/trip_model.dart';
 import 'package:mainpage/mainpage.dart';
@@ -318,6 +319,9 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _hotelCard(BuildContext context, HotelItemsModel hotel) {
+    NumberFormat currencyFormatter =
+        NumberFormat.currency(locale: 'IDR', symbol: "Rp. ");
+
     return Align(
       alignment: Alignment.centerLeft,
       child: SizedBox(
@@ -375,7 +379,8 @@ class HomeScreen extends StatelessWidget {
                                 Icons.price_change,
                                 color: Colors.amber[400],
                               ),
-                              Text('Rp. ${hotel.price}', style: kBodyText),
+                              Text(currencyFormatter.format(hotel.price),
+                                  style: kBodyText),
                             ],
                           ),
                         ],
@@ -392,6 +397,9 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _tripCard(BuildContext context, TripItemsModel trip) {
+    NumberFormat currencyFormatter =
+        NumberFormat.currency(locale: 'IDR', symbol: "Rp. ");
+
     return Align(
       alignment: Alignment.centerLeft,
       child: SizedBox(
@@ -449,7 +457,8 @@ class HomeScreen extends StatelessWidget {
                                 Icons.price_change,
                                 color: Colors.amber[400],
                               ),
-                              Text('Rp. ${trip.price}', style: kBodyText),
+                              Text(currencyFormatter.format(trip.price),
+                                  style: kBodyText),
                             ],
                           ),
                         ],

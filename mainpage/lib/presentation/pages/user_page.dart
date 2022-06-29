@@ -27,14 +27,14 @@ class UserPage extends StatelessWidget {
 
     final googleUser = _auth.currentUser!.providerData[0];
 
-    Future<String> getData() async {
+    Future<String?> getData() async {
       final prefs = await SharedPreferences.getInstance();
       var data = prefs.getString("data");
 
       if (data != null) {
         return data;
       } else {
-        return "";
+        return null;
       }
     }
 
@@ -55,6 +55,8 @@ class UserPage extends StatelessWidget {
             future: getData(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
+                if (snapshot.data == null) return Container();
+
                 final data = json.decode(snapshot.data);
 
                 return Column(
@@ -124,7 +126,6 @@ class UserPage extends StatelessWidget {
                   ],
                 );
               } else if (snapshot.hasError) {
-                print("get data error: ${snapshot.error}");
                 return const Center(child: Text("Error"));
               } else {
                 return Column(
@@ -159,7 +160,7 @@ class UserPage extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 125.0),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.1),
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -15,7 +15,7 @@ class UserFavorite extends StatelessWidget {
     return AppBar(
       backgroundColor: backgroundPrimary1,
       toolbarHeight: 75,
-      title: Text('Favorite Place/Trip', style: button),
+      title: Text('Favorite', style: button),
     );
   }
 
@@ -47,8 +47,7 @@ Widget userFavoriteBody(BuildContext context) {
             value.getFavoriteHotels();
 
             if (value.hotelState == ResultState.hasData) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+              return SizedBox(
                 height: 200,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -86,8 +85,7 @@ Widget userFavoriteBody(BuildContext context) {
             value.getFavoriteTrips();
 
             if (value.tripState == ResultState.hasData) {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+              return SizedBox(
                 height: 200,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -197,75 +195,70 @@ Widget _hotelCard(BuildContext context, HotelItemsModel hotel) {
 Widget _tripCard(BuildContext context, TripItemsModel trip) {
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,
-    child: Align(
-      alignment: Alignment.centerLeft,
-      child: SizedBox(
-        child: InkWell(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return TripDetailPage(trip: trip);
-            }),
-          ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                child: CachedNetworkImage(
-                  imageUrl: trip.photoUrl!,
-                  height: 125,
-                  width: 125,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                  ),
-                ),
+    child: InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return TripDetailPage(trip: trip);
+        }),
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            child: CachedNetworkImage(
+              imageUrl: trip.photoUrl!,
+              height: 125,
+              width: 125,
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator(),
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(trip.name, style: kBodyText),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            alignment: Alignment.centerLeft,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(trip.name, style: kBodyText),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.amber[400],
-                              ),
-                              Text('${trip.rating}', style: kBodyText),
-                            ],
+                          Icon(
+                            Icons.star,
+                            color: Colors.amber[400],
                           ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.price_change,
-                                color: Colors.amber[400],
-                              ),
-                              Text('Rp. ${trip.price}', style: kBodyText),
-                            ],
-                          ),
+                          Text('${trip.rating}', style: kBodyText),
                         ],
                       ),
-                    ),
-                  ],
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.price_change,
+                            color: Colors.amber[400],
+                          ),
+                          Text('Rp. ${trip.price}', style: kBodyText),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     ),
   );
