@@ -1,11 +1,16 @@
 # Be Traveled
 
-Projek ini dibuat sebagai **Capstone Project** di program MSIB (_Magang dan Studi Independen Bersertifikat_) dari Kampus Merdeka x Dicoding.
+Repo ini merupakan **Capstone Project** dari paket belajar "Multi-Platform dan Back-End" sebagai syarat kelulusan di program MSIB (_Magang dan Studi Independen Bersertifikat_) Kampus Merdeka x Dicoding oleh pemerintah yang diselenggarakan pada 7 Februari 2022 hingga 7 Agustus 2022, terdapat dua paket belajar yang disediakan:
 
-Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik itu hotel dan melakukan trip wisata. Selain itu, adapun fitur tiket pesawat bagi wisatawan yang ingin berlibur ke sebuah negara.
+- Front-End dan Back-End atau Learning Path "Frontend Web Developer" di Platform Dicoding
+- Multi-Platform dan Back-End atau Learning Path "Multi-Platform App Developer" di Platform Dicoding
+
+Projek dikerjakan dengan waktu 7 minggu, dari 23 Mei hingga 30 Juni 2022.
+
+**Be Traveled** adalah sebuah aplikasi yang memberikan informasi destinasi tempat wisata yang akan dituju. Pengguna dapat menggunakan aplikasi tersebut melalui smartphone yang dapat diakses dimana saja dan kapan saja. Aplikasi Be Traveled dapat membantu wisatawan berlibur ke tempat yang diinginkan sekaligus membantu tempat wisata yang mengalami kerugian akibat pandemi tersebut.
 
 ## Fitur Aplikasi
-- Otentikasi melalui akun yang terdaftar atau akun google
+- Otentikasi melalui akun yang terdaftar dan akun google
 - Menambahkan trip atau hotel sebagai favorit
 - Pesan/booking hotel, trip, atau tiket pesawat
 - Detail dari hotel atau trip yang dipilih
@@ -13,6 +18,12 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 
 ## Tools
 - Visual Studio Code
+
+atau juga dikenal denga VS Code merupakan *source-code editor* dibuat oleh perusahaan Micosoft untuk Sistem Operasi WIndows, Linux, dan MacOS. Fitur-fitur yang tersedia meliputi mendukung proses *debugging, *syntax highlighting*, *intelligent code completion*, *snippets*, *code refactoring*, dan *embedded Git*.([wiki](https://en.wikipedia.org/wiki/Visual_Studio_Code))
+
+- Figma
+
+merupakan sebuah _vector graphics editor_ dan _prototyping tool_ online berbasis web, dan memiliki tambahan fitur bahkan ketika _offline_ sebagai aplikasi _desktop_ yang dibangun untuk MacOS dan Windows. Aplikasi _mobile_ Figma yang ditujukan untuk Android dan iOS memberikan kemudahan untuk melihat dan berinteraksi dengan _prototype_ di Figma secara _real-time_. Fitur di Figma difokuskan di _user interface_ dan desain _user experience_, dengan lebih menekankan di bagian kolaborasi secara real-time.
 
 ## Library/Packages
 | Nama | Versi | link |
@@ -45,6 +56,9 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 - Firebase
 
 # Cara Menggunakan Aplikasi Be Traveled
+
+akun yang telah disediakan:
+
 email: a@a.com
 
 password: 123456
