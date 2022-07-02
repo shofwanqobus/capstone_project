@@ -19,11 +19,11 @@ Projek dikerjakan dengan waktu 7 minggu, dari 23 Mei hingga 30 Juni 2022.
 ## Tools
 - Visual Studio Code
 
-atau juga dikenal denga VS Code merupakan *source-code editor* dibuat oleh perusahaan Micosoft untuk Sistem Operasi WIndows, Linux, dan MacOS. Fitur-fitur yang tersedia meliputi mendukung proses *debugging, *syntax highlighting*, *intelligent code completion*, *snippets*, *code refactoring*, dan *embedded Git*.([wiki](https://en.wikipedia.org/wiki/Visual_Studio_Code))
+atau juga dikenal denga VS Code merupakan *source-code editor* dibuat oleh perusahaan Micosoft untuk Sistem Operasi WIndows, Linux, dan MacOS. Fitur-fitur yang tersedia meliputi mendukung proses *debugging, *syntax highlighting*, *intelligent code completion*, *snippets*, *code refactoring*, dan *embedded Git*. ([wiki](https://en.wikipedia.org/wiki/Visual_Studio_Code))
 
 - Figma
 
-merupakan sebuah _vector graphics editor_ dan _prototyping tool_ online berbasis web, dan memiliki tambahan fitur bahkan ketika _offline_ sebagai aplikasi _desktop_ yang dibangun untuk MacOS dan Windows. Aplikasi _mobile_ Figma yang ditujukan untuk Android dan iOS memberikan kemudahan untuk melihat dan berinteraksi dengan _prototype_ di Figma secara _real-time_. Fitur di Figma difokuskan di _user interface_ dan desain _user experience_, dengan lebih menekankan di bagian kolaborasi secara real-time.([wiki](https://en.wikipedia.org/wiki/Figma_(software)))
+merupakan sebuah _vector graphics editor_ dan _prototyping tool_ online berbasis web, dan memiliki tambahan fitur bahkan ketika _offline_ sebagai aplikasi _desktop_ yang dibangun untuk MacOS dan Windows. Aplikasi _mobile_ Figma yang ditujukan untuk Android dan iOS memberikan kemudahan untuk melihat dan berinteraksi dengan _prototype_ di Figma secara _real-time_. Fitur di Figma difokuskan di _user interface_ dan desain _user experience_, dengan lebih menekankan di bagian kolaborasi secara real-time. ([wiki](https://en.wikipedia.org/wiki/Figma_(software)))
 
 ## Library/Packages
 | Nama | Versi | link |
