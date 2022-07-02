@@ -23,6 +23,8 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 |cloud_firestore|3.1.17|https://pub.dev/packages/cloud_firestore|
 |google_sign_in|5.3.3|https://pub.dev/packages/google_sign_in|
 |intl|0.17.0|https://pub.dev/packages/intl|
+|bloc|8.0.3|https://pub.dev/packages/bloc|
+|flutter_bloc|8.0.1|https://pub.dev/packages/flutter_bloc|
 |shared_preferences|2.0.15|https://pub.dev/packages/shared_preferences|
 |cached_network_image|3.2.1|https://pub.dev/packages/cached_network_image|
 |cupertino_icons|1.0.2|https://pub.dev/packages/cupertino_icons|
@@ -43,9 +45,20 @@ Be Traveled merupakan sebuah aplikasi travel yang memberikan tempat liburan baik
 - Firebase
 
 # Cara Menggunakan Aplikasi Be Traveled
-- Buka Aplikasi Be Traveled pada Smartphone anda,
-- Pilih pada bagian Login with Account
-- Jika anda belum memiliki akun, klik pada bagian Sign Up now
-- Masukan data diri seperti username, email, password, no handphone, dan tanggal lahir
-- Jika anda sudah memiliki akun, anda dapat dengan langsung login dengan akun yang sudah dibuat (email: a@a.com, password: 123456)
-- Setelah login, akan muncul halaman homepage dengan hotel dan trip. Jika anda ingin memesan tiket, anda dapat klik icon ticket pada homepage
+email: a@a.com
+
+password: 123456
+
+- Anda bisa login melalui "Login with Account" jika telah mendaftarkan akun
+- Jika Anda memiliki akun Google, Anda bisa login dengan akun Anda melalui "Login with Google"
+- Jika anda belum memiliki akun, klik pada bagian "Sign Up now" untuk mendaftar
+  - Masukan data diri seperti username, email, password, no handphone, tanggal lahir, lalu centang kotak persetujuan
+  - Setelah akun berhasil dibuat, Anda akan diarahkan ke halaman login
+- Setelah login, Anda akan diarahkan ke halaman home
+- Anda bisa memilih hotel atau trip untuk detail lebih lanjut
+- Di halaman detail, Anda bisa booking di tombol bagian bawah bertuliskan "Book Now"
+- Di halaman detail, Anda bisa meng-favoritkan hotel atau trip yang Anda lihat dengan menekan ikon hati di bagian atas kiri
+- Tiket pesawat bisa Anda pesan melalui ikon pesawat dari halaman Home
+- Halaman Booked Akan menampilkan berbagai trip, hotel dan tiket pesawat yang telah Anda pesan
+- Fitur pencarian ada di halaman Search, cukup masukkan nama yang ingin Anda cari
+- Untuk logout bisa dilakukan melalui halaman Settings
