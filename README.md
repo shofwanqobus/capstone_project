@@ -19,7 +19,7 @@ Projek dikerjakan dengan waktu 7 minggu, dari 23 Mei hingga 30 Juni 2022.
 ## Tools
 - Visual Studio Code
 
-atau juga dikenal denga VS Code merupakan *source-code editor* dibuat oleh perusahaan Micosoft untuk Sistem Operasi WIndows, Linux, dan MacOS. Fitur-fitur yang tersedia meliputi mendukung proses *debugging, *syntax highlighting*, *intelligent code completion*, *snippets*, *code refactoring*, dan *embedded Git*. ([wiki](https://en.wikipedia.org/wiki/Visual_Studio_Code))
+atau juga dikenal denga VS Code merupakan *source-code editor* dibuat oleh perusahaan Micosoft untuk Sistem Operasi WIndows, Linux, dan MacOS. Fitur-fitur yang tersedia meliputi mendukung proses *debugging*, *syntax highlighting*, *intelligent code completion*, *snippets*, *code refactoring*, dan *embedded Git*. ([wiki](https://en.wikipedia.org/wiki/Visual_Studio_Code))
 
 - Figma
 
